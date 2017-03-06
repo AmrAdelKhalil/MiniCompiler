@@ -233,7 +233,7 @@ public class Tokenizer {
 	
 	public void if_condition(String data){
 		
-		pattern = Pattern.compile("[\\s{} ]if[\b( ]");
+		pattern = Pattern.compile("\\bif\\b");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -244,7 +244,7 @@ public class Tokenizer {
 	
 	public  void int_data_type(String data){
 		
-		pattern = Pattern.compile("[\\s ]int[( ]");
+		pattern = Pattern.compile("\\bint\\b");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -255,7 +255,7 @@ public class Tokenizer {
 	
 	public void else_condition(String data){
 		
-		pattern = Pattern.compile("[\\s }]else[\\s {]");
+		pattern = Pattern.compile("\\belse\\b");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
