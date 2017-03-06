@@ -28,7 +28,15 @@ public class Tokenizer {
 		if_condition(data);
 		int_data_type(data);
 		else_condition(data);
-		
+		INTEGRAL_LITERAL(data);
+		FLOAT_LITERAL(data);
+		STRING_LITERAL(data);
+		ID(data);
+		SINGLE_QUTATION(data);
+		DOUBLE_QUTATION(data);
+		COMMENT2_1(data);
+		COMMENT2_2(data);
+		CHAR(data);
 		return lexemes;
 	}
 	
@@ -503,7 +511,7 @@ public class Tokenizer {
 	public ArrayList<Lexeme> INTEGRAL_LITERAL(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\\b[-]?\\d+\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -515,7 +523,7 @@ public class Tokenizer {
 	public ArrayList<Lexeme> FLOAT_LITERAL(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\\b[-]?\\d+.?\\d+\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -527,7 +535,7 @@ public class Tokenizer {
 	public ArrayList<Lexeme> STRING_LITERAL(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\"\\w*\"");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -536,83 +544,79 @@ public class Tokenizer {
 		
 		return lexemes;
 	}
-	public ArrayList<Lexeme> ID(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
-		
-		pattern = Pattern.compile("");
+	public ArrayList<Lexeme> ID(String data){ 
+
+		pattern = Pattern.compile("\\b[A-Za-z_]\\w+\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "ID"));
+			if(matcher.group().equals("int") || matcher.group().equals("String") || matcher.group().equals("boolean") || 
+			   matcher.group().equals("float") || matcher.group().equals("char") ||  matcher.group().equals("if") || 
+			   matcher.group().equals("else"))continue;
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "ID"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> COMMENT1(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
 		pattern = Pattern.compile("");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "COMMENT1"));
+			lexemes.add(new Lexeme(matcher.start(), "", "SLASH_COMMENT"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> SINGLE_QUTATION(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("'");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "\'"));
+			lexemes.add(new Lexeme(matcher.start(), "'", "SINGLE_QOUTE"));
 		}
 		
 		return lexemes;
 	}
 	
 	public ArrayList<Lexeme> DOUBLE_QUTATION(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\"");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "\""));
+			lexemes.add(new Lexeme(matcher.start(), "\"", "DOUBLE_QOUTES"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> COMMENT2_1(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
-		
-		pattern = Pattern.compile("");
+	
+		pattern = Pattern.compile("[/][*]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "/*"));
+			lexemes.add(new Lexeme(matcher.start(), "/*", "START_OF_COMMENT"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> COMMENT2_2(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("[*][/]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "*/"));
+			lexemes.add(new Lexeme(matcher.start(), "*/", "END_OF_COMMENT"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> CHAR(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\\bchar\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {

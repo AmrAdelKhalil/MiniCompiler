@@ -19,7 +19,7 @@ public class Main {
 		Tokenizer tokens=new Tokenizer();
 		ArrayList<Lexeme>res=tokens.run(in);
 		for(int i=0;i<res.size();i++)
-			System.out.println(res.get(i).index+" "+res.get(i).value);
+			System.out.println(res.get(i).index+" "+res.get(i).value+" "+res.get(i).token);
 	}
 
 }
