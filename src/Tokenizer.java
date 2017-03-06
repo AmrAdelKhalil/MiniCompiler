@@ -1,8 +1,10 @@
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Tokenizer {
 	
-	
+	public ArrayList<Lexeme> EOL(String data){
+		
+		
+		return null;
+	}
 }
