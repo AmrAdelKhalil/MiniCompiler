@@ -41,6 +41,21 @@ public class Tokenizer {
 		MAIN(data);
 		THIS(data);
 		TRUE(data);
+		VOID(data);
+		CLASS(data);
+		FALSE(data);
+		WHILE(data);
+		LENGTH(data);
+		PUBLIC(data);
+		RETURN(data);
+		STATIC(data);
+		NEW(data);
+		STRING(data);
+		FLOAT(data);
+		CHARACTER(data);
+		BOOLEAN(data);
+		EXTENDS(data);
+		SYSTEM_OUT_PRINTLN(data);
 		COMMENT1(data);
 		return lexemes;
 	}
@@ -451,7 +466,7 @@ public class Tokenizer {
 	}
 	public void SYSTEM_OUT_PRINTLN(String data){
 		
-		pattern = Pattern.compile("(^|[ ;])System.out.print[ (]");
+		pattern = Pattern.compile("\\bSystem.out.print[ (]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -503,7 +518,10 @@ public class Tokenizer {
 		while (matcher.find()) {
 			if(matcher.group().equals("int") || matcher.group().equals("String") || matcher.group().equals("boolean") || 
 			   matcher.group().equals("float") || matcher.group().equals("char") ||  matcher.group().equals("if") || 
-			   matcher.group().equals("else"))continue;
+			   matcher.group().equals("else") || matcher.group().equals("void") || matcher.group().equals("static")
+			   || matcher.group().equals("class")|| matcher.group().equals("this") || matcher.group().equals("while")
+			   || matcher.group().equals("Character") || matcher.group().equals("main") || matcher.group().equals("public")
+			   || matcher.group().equals("new") || matcher.group().equals("extends"))continue;
 			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "ID"));
 		}
 		
@@ -516,7 +534,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "////", "COMMENT1"));
+			lexemes.add(new Lexeme(matcher.start(), "//", "COMMENT1"));
 		}
 		
 	}
