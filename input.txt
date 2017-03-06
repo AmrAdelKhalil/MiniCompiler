@@ -1,9 +1,8 @@
-ifhi+-elsebye
-if (i&&j){
-}else{}
-int x=5/6, intg=8-5;
-
-
-
-[sds  ]else!!
-if(k<i){if(i>=k)else
+(true)
+(a==true)
+(a== true&)
+(a== true|)
+a= true;
+a=true;
+(true == 5)
+!true)
