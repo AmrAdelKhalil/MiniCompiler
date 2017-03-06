@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.regex.*;
 
+
 public class Tokenizer {
 	public Pattern pattern = null;
 	public Matcher matcher = null;
@@ -37,6 +38,10 @@ public class Tokenizer {
 		COMMENT2_1(data);
 		COMMENT2_2(data);
 		CHAR(data);
+		MAIN(data);
+		THIS(data);
+		TRUE(data);
+		COMMENT1(data);
 		return lexemes;
 	}
 	
@@ -273,240 +278,186 @@ public class Tokenizer {
 	}
 	
 	
-	public ArrayList<Lexeme> MAIN(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
-		
-		pattern = Pattern.compile("main");
+	public void MAIN(String data){
+		pattern = Pattern.compile("\\bmain[( ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "main", "MAIN"));
 		}
-		
-		return lexemes;
 	}
 	
-	public ArrayList<Lexeme> THIS(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void THIS(String data){
 		
-		pattern = Pattern.compile("this");
+		pattern = Pattern.compile("[( ;]?this[.) ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "this", "THIS"));
-//            System.out.print("Start index: " + matcher.start());
-//            System.out.print(" End index: " + matcher.end() + " ");
-//            System.out.println(matcher.group());
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> TRUE(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void TRUE(String data){
 		
-		pattern = Pattern.compile("true");
+		pattern = Pattern.compile("[= (!]true[ );&|=]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "true", "TRUE"));
-//            System.out.print("Start index: " + matcher.start());
-//            System.out.print(" End index: " + matcher.end() + " ");
-//            System.out.println(matcher.group());
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> VOID(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	
+	public void VOID(String data){
 		
-		pattern = Pattern.compile("void");
+		pattern = Pattern.compile("(^|[ ])void[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "void", "VOID"));
-//            System.out.print("Start index: " + matcher.start());
-//            System.out.print(" End index: " + matcher.end() + " ");
-//            System.out.println(matcher.group());
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> CLASS(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void CLASS(String data){
 		
-		pattern = Pattern.compile("class");
+		pattern = Pattern.compile("(^|[ ])class[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "class", "CLASS"));
-//            System.out.print("Start index: " + matcher.start());
-//            System.out.print(" End index: " + matcher.end() + " ");
-//            System.out.println(matcher.group());
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> FALSE(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void FALSE(String data){
 		
-		pattern = Pattern.compile("false");
+		pattern = Pattern.compile("[= (!]true[ );&|=]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "false", "FALSE"));
-//            System.out.print("Start index: " + matcher.start());
-//            System.out.print(" End index: " + matcher.end() + " ");
-//            System.out.println(matcher.group());
 		}
 		
-		return lexemes;
 	}
 	
-	public ArrayList<Lexeme> WHILE(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void WHILE(String data){
 		
-		pattern = Pattern.compile("while");
+		pattern = Pattern.compile("(^|[ ;])while[( ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "while", "WHILE"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> LENGTH(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
-		
-		pattern = Pattern.compile("length");
+	public void LENGTH(String data){
+		pattern = Pattern.compile("[. ]length([ ;]|$)");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "length", "LENGTH"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> PUBLIC(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	
+	public void PUBLIC(String data){
 		
-		pattern = Pattern.compile("public");
+		pattern = Pattern.compile("(^|[ ;])public[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "public", "PUBLIC"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> RETURN(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void RETURN(String data){
 		
-		pattern = Pattern.compile("return");
+		pattern = Pattern.compile("(^|[ ;])return([ ;]|$)");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "return", "RETURN"));
 		}
 		
-		return lexemes;
 	}
 
-	public ArrayList<Lexeme> STATIC(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void STATIC(String data){
 		
-		pattern = Pattern.compile("static");
+		pattern = Pattern.compile("[ ]static[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "static", "STATIC"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> NEW(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void NEW(String data){
 		
-		pattern = Pattern.compile("new");
+		pattern = Pattern.compile("(^|[ (=;])new[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "new", "NEW"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> STRING(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void STRING(String data){
 		
-		pattern = Pattern.compile("string");
+		pattern = Pattern.compile("(^|[ ;])String[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "string", "STRING"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> FLOAT(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void FLOAT(String data){
 		
-		pattern = Pattern.compile("float");
+		pattern = Pattern.compile("(^|[ ;])float[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "float", "FLOAT"));
 		}
 		
-		return lexemes;
 	}
 	
-	public ArrayList<Lexeme> CHARACTER(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
-		
-		pattern = Pattern.compile("character");
+	public void CHARACTER(String data){
+		pattern = Pattern.compile("(^|[ ;])Character[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "character", "CHARACTER"));
-		}
-		
-		return lexemes;
+			lexemes.add(new Lexeme(matcher.start(), "Character", "CHARACTER"));
+		}		
 	}
-	public ArrayList<Lexeme> BOOLEAN(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	
+	public void BOOLEAN(String data){
 		
-		pattern = Pattern.compile("boolean");
+		pattern = Pattern.compile("(^|[ ;])boolean[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "boolean", "BOOLEAN"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> EXTENDS(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void EXTENDS(String data){
 		
-		pattern = Pattern.compile("extends");
+		pattern = Pattern.compile("[ ]extends[ ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "extends", "EXTENDS"));
-		}
-		
-		return lexemes;
+		}	
 	}
-	public ArrayList<Lexeme> SYSTEM_OUT_PRINTLN(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void SYSTEM_OUT_PRINTLN(String data){
 		
-		pattern = Pattern.compile("System.out.print");
+		pattern = Pattern.compile("(^|[ ;])System.out.print[ (]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "System.out.print", "SYSTEM.OUT.PRINTLN"));
 		}
 		
-		return lexemes;
 	}
 	public ArrayList<Lexeme> INTEGRAL_LITERAL(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
@@ -558,16 +509,16 @@ public class Tokenizer {
 		
 		return lexemes;
 	}
-	public ArrayList<Lexeme> COMMENT1(String data){
+
+	public void COMMENT1(String data){
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\\/\\/");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "SLASH_COMMENT"));
+			lexemes.add(new Lexeme(matcher.start(), "////", "COMMENT1"));
 		}
 		
-		return lexemes;
 	}
 	public ArrayList<Lexeme> SINGLE_QUTATION(String data){
 		
@@ -625,5 +576,6 @@ public class Tokenizer {
 		
 		return lexemes;
 	}
+	
 
 }
