@@ -1,15 +1,25 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
-	public static void main (String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		Tokenizer t = new Tokenizer();
-		ArrayList<Lexeme> res = t.THIS(" this)");
-		System.out.println(res.size());
-		for(Lexeme l : res){
-			System.out.println(l.index + " " + l.value + " " + l.token);
-		}
+			String in="";
+			Scanner input=new Scanner(new File("input.txt"));
+			
+			  while (input.hasNextLine()) {
+	                String line = input.nextLine();
+	                in+=line;
+	                in+="\n";
+	            }
+		System.out.println(in);
+		Tokenizer tokens=new Tokenizer();
+		ArrayList<Lexeme>res=tokens.run(in);
+		for(int i=0;i<res.size();i++)
+			System.out.println(res.get(i).index+" "+res.get(i).value);
 	}
 
 }
