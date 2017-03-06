@@ -32,6 +32,7 @@ public class Tokenizer {
 		MAIN(data);
 		THIS(data);
 		TRUE(data);
+		COMMENT1(data);
 		return lexemes;
 	}
 	
@@ -497,17 +498,15 @@ public class Tokenizer {
 		
 		return lexemes;
 	}
-	public ArrayList<Lexeme> COMMENT1(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
+	public void COMMENT1(String data){
 		
-		pattern = Pattern.compile("");
+		pattern = Pattern.compile("\\/\\/");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "COMMENT1"));
+			lexemes.add(new Lexeme(matcher.start(), "commet 1", "COMMENT1"));
 		}
 		
-		return lexemes;
 	}
 	public ArrayList<Lexeme> SINGLE_QUTATION(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
