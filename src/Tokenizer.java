@@ -268,7 +268,6 @@ public class Tokenizer {
 		
 	}
 	
-	
 	public void MAIN(String data){
 		pattern = Pattern.compile("\\bmain[( ]");
 		matcher = pattern.matcher(data);
@@ -277,10 +276,10 @@ public class Tokenizer {
 			lexemes.add(new Lexeme(matcher.start(), "main", "MAIN"));
 		}
 	}
-	
+
 	public void THIS(String data){
 		
-		pattern = Pattern.compile("[( ;]?this[.) ]");
+		pattern = Pattern.compile("\\bthis\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -288,9 +287,10 @@ public class Tokenizer {
 		}
 		
 	}
+	
 	public void TRUE(String data){
 		
-		pattern = Pattern.compile("[= (!]true[ );&|=]");
+		pattern = Pattern.compile("\\btrue\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -301,7 +301,7 @@ public class Tokenizer {
 	
 	public void VOID(String data){
 		
-		pattern = Pattern.compile("(^|[ ])void[ ]");
+		pattern = Pattern.compile("\\bvoid\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -311,7 +311,7 @@ public class Tokenizer {
 	}
 	public void CLASS(String data){
 		
-		pattern = Pattern.compile("(^|[ ])class[ ]");
+		pattern = Pattern.compile("\\bclass\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -319,9 +319,10 @@ public class Tokenizer {
 		}
 		
 	}
+	
 	public void FALSE(String data){
 		
-		pattern = Pattern.compile("[= (!]true[ );&|=]");
+		pattern = Pattern.compile("\\bfalse\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -332,7 +333,7 @@ public class Tokenizer {
 	
 	public void WHILE(String data){
 		
-		pattern = Pattern.compile("(^|[ ;])while[( ]");
+		pattern = Pattern.compile("\\bwhile\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -343,7 +344,6 @@ public class Tokenizer {
 	public void LENGTH(String data){
 		pattern = Pattern.compile("[. ]length([ ;]|$)");
 		matcher = pattern.matcher(data);
-		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "length", "LENGTH"));
 		}
@@ -352,7 +352,7 @@ public class Tokenizer {
 	
 	public void PUBLIC(String data){
 		
-		pattern = Pattern.compile("(^|[ ;])public[ ]");
+		pattern = Pattern.compile("\\bpublic\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -362,7 +362,7 @@ public class Tokenizer {
 	}
 	public void RETURN(String data){
 		
-		pattern = Pattern.compile("(^|[ ;])return([ ;]|$)");
+		pattern = Pattern.compile("\\breturn\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -373,7 +373,7 @@ public class Tokenizer {
 
 	public void STATIC(String data){
 		
-		pattern = Pattern.compile("[ ]static[ ]");
+		pattern = Pattern.compile("\\bstatic\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -383,7 +383,7 @@ public class Tokenizer {
 	}
 	public void NEW(String data){
 		
-		pattern = Pattern.compile("(^|[ (=;])new[ ]");
+		pattern = Pattern.compile("\\bnew\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -392,7 +392,7 @@ public class Tokenizer {
 		
 	}
 	public void STRING(String data){
-		
+
 		pattern = Pattern.compile("(^|[ ;])String[ ]");
 		matcher = pattern.matcher(data);
 		
@@ -403,7 +403,7 @@ public class Tokenizer {
 	}
 	public void FLOAT(String data){
 		
-		pattern = Pattern.compile("(^|[ ;])float[ ]");
+		pattern = Pattern.compile("\\bfloat\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -411,7 +411,7 @@ public class Tokenizer {
 		}
 		
 	}
-	
+	 
 	public void CHARACTER(String data){
 		pattern = Pattern.compile("(^|[ ;])Character[ ]");
 		matcher = pattern.matcher(data);
@@ -423,7 +423,7 @@ public class Tokenizer {
 	
 	public void BOOLEAN(String data){
 		
-		pattern = Pattern.compile("(^|[ ;])boolean[ ]");
+		pattern = Pattern.compile("\\bboolean\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -433,7 +433,7 @@ public class Tokenizer {
 	}
 	public void EXTENDS(String data){
 		
-		pattern = Pattern.compile("[ ]extends[ ]");
+		pattern = Pattern.compile("\\bextends\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
