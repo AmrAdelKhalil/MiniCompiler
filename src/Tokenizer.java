@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class Tokenizer {
 	public Pattern pattern = null;
 	public Matcher matcher = null;
 	public ArrayList<Lexeme> MAIN(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
-		
-		pattern = Pattern.compile("main");
+ 		
+		pattern = Pattern.compile("\\bmain[( ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -21,7 +22,7 @@ public class Tokenizer {
 	public ArrayList<Lexeme> THIS(String data){
 		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("this");
+		pattern = Pattern.compile("[( ]?this[.) ]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -40,7 +41,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "true", "TRUE"));
+			lexemes.add(new Lexeme(matcher.start(), "[= (]true[ );&|=]", "TRUE"));
 //            System.out.print("Start index: " + matcher.start());
 //            System.out.print(" End index: " + matcher.end() + " ");
 //            System.out.println(matcher.group());
@@ -361,6 +362,7 @@ public class Tokenizer {
 		
 		return lexemes;
 	}
+	
 
 	
 	
