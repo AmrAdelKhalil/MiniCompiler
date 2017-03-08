@@ -57,6 +57,7 @@ public class Tokenizer {
 		EXTENDS(data);
 		SYSTEM_OUT_PRINTLN(data);
 		COMMENT1(data);
+		lexemes.sort(new Lexeme());
 		return lexemes;
 	}
 	
@@ -66,7 +67,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"\n","EOL"));
+			lexemes.add(new Lexeme(matcher.start(),"\\n","EOL"));
 		}
 		
 	}
@@ -228,7 +229,7 @@ public class Tokenizer {
 	
 	public void mul(String data){
 		
-		pattern = Pattern.compile("\\*");
+		pattern = Pattern.compile("[\\d ]+\\*[\\d ]+");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -475,44 +476,41 @@ public class Tokenizer {
 		
 	}
 	public ArrayList<Lexeme> INTEGRAL_LITERAL(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("\\b[-]?\\d+\\b");
+		pattern = Pattern.compile("[^.]\\b[-]?\\d+\\b[^.]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "INTEGRAL_LITERAL"));
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "INTEGRAL_LITERAL"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> FLOAT_LITERAL(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
-		pattern = Pattern.compile("\\b[-]?\\d+.?\\d+\\b");
+		pattern = Pattern.compile("\\b[-]?\\d+\\.?\\d+\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "FLOAT_LITERAL"));
+			lexemes.add(new Lexeme(matcher.start(),  matcher.group(), "FLOAT_LITERAL"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> STRING_LITERAL(String data){
-		ArrayList<Lexeme> lexemes = new ArrayList<Lexeme>();
 		
 		pattern = Pattern.compile("\"\\w*\"");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "", "STRING_LITERAL"));
+			lexemes.add(new Lexeme(matcher.start(),  matcher.group(), "STRING_LITERAL"));
 		}
 		
 		return lexemes;
 	}
 	public ArrayList<Lexeme> ID(String data){ 
 
-		pattern = Pattern.compile("\\b[A-Za-z_]\\w+\\b");
+		pattern = Pattern.compile("\\b[A-Za-z_]\\w*\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {

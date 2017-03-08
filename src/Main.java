@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -15,11 +17,11 @@ public class Main {
 	                in+=line;
 	                in+="\n";
 	            }
-		System.out.println(in);
 		Tokenizer tokens=new Tokenizer();
 		ArrayList<Lexeme>res=tokens.run(in);
+		
 		for(int i=0;i<res.size();i++)
-			System.out.println(res.get(i).index+" "+res.get(i).value+" "+res.get(i).token);
+			System.out.println("<"+res.get(i).token+"> : "+res.get(i).value);
 	}
 
 }
