@@ -21,6 +21,6 @@ float xflaot=222;
 boolean booleanbolean=11
 charr char*
 sYSTEM.out.println
-System.out.print(
+System.out.println(
 staticS
 static 

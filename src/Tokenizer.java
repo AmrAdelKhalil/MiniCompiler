@@ -35,6 +35,7 @@ public class Tokenizer {
 		ID(data);
 		SINGLE_QUTATION(data);
 		DOUBLE_QUTATION(data);
+		COMMENT2(data);
 		COMMENT2_1(data);
 		COMMENT2_2(data);
 		CHAR(data);
@@ -89,7 +90,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"{","OPEN_CURLY_BRACKET"));
+			lexemes.add(new Lexeme(matcher.start(),"{","LEFT_CURLY_B"));
 		}
 		
 	}
@@ -100,7 +101,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"}","CLOSE_CURLY_BRACKET"));
+			lexemes.add(new Lexeme(matcher.start(),"}","RIGHT_CURLY_B"));
 		}
 		
 	}
@@ -111,7 +112,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"[","OPEN_SQUARE_BRACKET"));
+			lexemes.add(new Lexeme(matcher.start(),"[","LEFT_SQUARE_B"));
 		}
 		
 	}
@@ -122,7 +123,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"]","CLOSE_SQUARE_BRACKET"));
+			lexemes.add(new Lexeme(matcher.start(),"]","RIGHT_SQUARE_B"));
 		}
 		
 	}
@@ -133,7 +134,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"(","OPEN_CIRCLE_BRACKET"));
+			lexemes.add(new Lexeme(matcher.start(),"(","LEFT_ROUND_B"));
 		}
 		
 	}
@@ -144,7 +145,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),")","CLOSE_CIRCLE_BRACKET"));
+			lexemes.add(new Lexeme(matcher.start(),")","RIGHT_ROUND_B"));
 		}
 		
 	}
@@ -188,7 +189,7 @@ public class Tokenizer {
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
-			lexemes.add(new Lexeme(matcher.start(),"!","EXCLAMATION_MARK"));
+			lexemes.add(new Lexeme(matcher.start(),"!","NOT"));
 		}
 		
 	}
@@ -438,11 +439,11 @@ public class Tokenizer {
 	}
 	 
 	public void CHARACTER(String data){
-		pattern = Pattern.compile("(^|[ ;])Character[ ]");
+		pattern = Pattern.compile("\\bchar\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "Character", "CHARACTER"));
+			lexemes.add(new Lexeme(matcher.start(), "char", "CHAR"));
 		}		
 	}
 	
@@ -467,26 +468,24 @@ public class Tokenizer {
 	}
 	public void SYSTEM_OUT_PRINTLN(String data){
 		
-		pattern = Pattern.compile("\\bSystem.out.print[ (]");
+		pattern = Pattern.compile("\\bSystem.out.println[ (]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "System.out.print", "SYSTEM.OUT.PRINTLN"));
+			lexemes.add(new Lexeme(matcher.start(), "System.out.println", "SYSTEM.OUT.PRINTLN"));
 		}
 		
 	}
-	public ArrayList<Lexeme> INTEGRAL_LITERAL(String data){
+	public void INTEGRAL_LITERAL(String data){
 		
-		pattern = Pattern.compile("[^.]\\b[-]?\\d+\\b[^.]");
+		pattern = Pattern.compile("[^.-/a-zA-Z\"]\\b[-]?\\d+\\b[^.-/a-zA-Z\"]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "INTEGRAL_LITERAL"));
 		}
-		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> FLOAT_LITERAL(String data){
+	public void FLOAT_LITERAL(String data){
 		
 		pattern = Pattern.compile("\\b[-]?\\d+\\.?\\d+\\b");
 		matcher = pattern.matcher(data);
@@ -494,21 +493,17 @@ public class Tokenizer {
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(),  matcher.group(), "FLOAT_LITERAL"));
 		}
-		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> STRING_LITERAL(String data){
+	public void STRING_LITERAL(String data){
 		
-		pattern = Pattern.compile("\"\\w*\"");
+		pattern = Pattern.compile("\"\\.*\"");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(),  matcher.group(), "STRING_LITERAL"));
 		}
-		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> ID(String data){ 
+	public void ID(String data){ 
 
 		pattern = Pattern.compile("\\b[A-Za-z_]\\w*\\b");
 		matcher = pattern.matcher(data);
@@ -522,8 +517,6 @@ public class Tokenizer {
 			   || matcher.group().equals("new") || matcher.group().equals("extends"))continue;
 			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "ID"));
 		}
-		
-		return lexemes;
 	}
 
 	public void COMMENT1(String data){
@@ -536,7 +529,7 @@ public class Tokenizer {
 		}
 		
 	}
-	public ArrayList<Lexeme> SINGLE_QUTATION(String data){
+	public void SINGLE_QUTATION(String data){
 		
 		pattern = Pattern.compile("'");
 		matcher = pattern.matcher(data);
@@ -544,11 +537,9 @@ public class Tokenizer {
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "'", "SINGLE_QOUTE"));
 		}
-		
-		return lexemes;
 	}
 	
-	public ArrayList<Lexeme> DOUBLE_QUTATION(String data){
+	public void DOUBLE_QUTATION(String data){
 		
 		pattern = Pattern.compile("\"");
 		matcher = pattern.matcher(data);
@@ -556,41 +547,45 @@ public class Tokenizer {
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), "\"", "DOUBLE_QOUTES"));
 		}
-		
-		return lexemes;
+
 	}
-	public ArrayList<Lexeme> COMMENT2_1(String data){
+	public void COMMENT2(String data){
+		
+		pattern = Pattern.compile("[/][*]\\.*[*][/]");
+		matcher = pattern.matcher(data);
+		
+		while (matcher.find()) {
+			lexemes.add(new Lexeme(matcher.start(), "/* any comment here */", "COMMENT2"));
+		}
+	}
+	public void COMMENT2_1(String data){
 	
 		pattern = Pattern.compile("[/][*]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "/*", "START_OF_COMMENT"));
+			lexemes.add(new Lexeme(matcher.start(), "/*", "COMMENT_L"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> COMMENT2_2(String data){
+	public void COMMENT2_2(String data){
 		
 		pattern = Pattern.compile("[*][/]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "*/", "END_OF_COMMENT"));
+			lexemes.add(new Lexeme(matcher.start(), "*/", "COMMENT_R"));
 		}
 		
-		return lexemes;
 	}
-	public ArrayList<Lexeme> CHAR(String data){
+	public void CHAR(String data){
 		
-		pattern = Pattern.compile("\\bchar\\b");
+		pattern = Pattern.compile("\'\\.\'");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "char", "CHAR"));
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "A_CHAR"));
 		}
-		
-		return lexemes;
 	}
 	
 
