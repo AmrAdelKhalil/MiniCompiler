@@ -478,7 +478,7 @@ public class Tokenizer {
 	}
 	public void INTEGRAL_LITERAL(String data){
 		
-		pattern = Pattern.compile("[^.-/a-zA-Z\"]\\b[-]?\\d+\\b[^.-/a-zA-Z\"]");
+		pattern = Pattern.compile("\\b[-]?(?!\\.)\\d+(?!\\.)\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -551,11 +551,11 @@ public class Tokenizer {
 	}
 	public void COMMENT2(String data){
 		
-		pattern = Pattern.compile("[/][*]\\.*[*][/]");
+		pattern = Pattern.compile("[/][*].*[*][/]");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "/* any comment here */", "COMMENT2"));
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "COMMENT2"));
 		}
 	}
 	public void COMMENT2_1(String data){
