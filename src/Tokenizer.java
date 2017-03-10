@@ -478,7 +478,8 @@ public class Tokenizer {
 	}
 	public void INTEGRAL_LITERAL(String data){
 		
-		pattern = Pattern.compile("\\b[-]?(?!\\.)\\d+(?!\\.)\\b");
+		//pattern = Pattern.compile("\\b\\d+(?![.\\d])\\b");
+		pattern = Pattern.compile("\\b(?<![.\\d])[+-]?\\d+(?![.\\d])\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
