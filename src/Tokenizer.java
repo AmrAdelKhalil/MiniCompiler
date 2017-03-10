@@ -58,6 +58,8 @@ public class Tokenizer {
 		EXTENDS(data);
 		SYSTEM_OUT_PRINTLN(data);
 		COMMENT1(data);
+		SPACE(data);
+		
 		lexemes.sort(new Lexeme());
 		return lexemes;
 	}
@@ -230,7 +232,7 @@ public class Tokenizer {
 	
 	public void mul(String data){
 		
-		pattern = Pattern.compile("[\\d ]+\\*[\\d ]+");
+		pattern = Pattern.compile("\\b\\*(\\b|[\\n])");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -295,7 +297,7 @@ public class Tokenizer {
 	}
 	
 	public void MAIN(String data){
-		pattern = Pattern.compile("\\bmain[( ]");
+		pattern = Pattern.compile("\\bmain\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -586,6 +588,15 @@ public class Tokenizer {
 		
 		while (matcher.find()) {
 			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "A_CHAR"));
+		}
+	}
+	public void SPACE(String data){
+		
+		pattern = Pattern.compile(" ");
+		matcher = pattern.matcher(data);
+		
+		while (matcher.find()) {
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "SPACE"));
 		}
 	}
 	

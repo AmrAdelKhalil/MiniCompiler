@@ -18,9 +18,9 @@ this
 publicthis
 public void Void class CLASS while While lengthlength
 float xflaot=222;
-boolean booleanbolean=11
+boolean booleanbolean=11 @ # $
 charr char*
 sYSTEM.out.println
 System.out.println(
-staticS
+staticS $$$
 static 

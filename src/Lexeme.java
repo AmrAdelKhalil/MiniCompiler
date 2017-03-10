@@ -10,6 +10,7 @@ public class Lexeme implements Comparator<Lexeme> {
 		this.value = value;
 		this.token = token;
 	}
+	
 	@Override
     public int compare(Lexeme o1, Lexeme o2) {
 		if(o1.index>o2.index)
