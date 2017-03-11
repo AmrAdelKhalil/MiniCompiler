@@ -30,6 +30,11 @@
 <SEMI_COLON> : ;
 <EOL> : \n
 <EOL> : \n
+<COMMENT1> : //$@#
+<EOL> : \n
+<COMMENT2> : /*$#@*/
+<COMMENT_L> : /*
+<COMMENT_R> : */
 <EOL> : \n
 <EOL> : \n
 <LEFT_SQUARE_B> : [
