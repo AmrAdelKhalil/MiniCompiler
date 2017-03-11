@@ -79,7 +79,6 @@
 <FLOAT_LITERAL> : 3.2
 <DOT> : .
 <INTEGRAL_LITERAL> : 55
-<FLOAT_LITERAL> : 55
 <DOUBLE_QOUTES> : "
 <ID> : _amr
 <EOL> : \n
@@ -107,14 +106,12 @@
 <ID> : xflaot
 <EQUAL> : =
 <INTEGRAL_LITERAL> : 222
-<FLOAT_LITERAL> : 222
 <SEMI_COLON> : ;
 <EOL> : \n
 <BOOLEAN> : boolean
 <ID> : booleanbolean
 <EQUAL> : =
 <INTEGRAL_LITERAL> : 11
-<FLOAT_LITERAL> : 11
 <EOL> : \n
 <ID> : charr
 <CHAR> : char
