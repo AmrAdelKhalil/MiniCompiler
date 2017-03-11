@@ -1,29 +1,31 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		// TODO Auto-generated method stub
-			String in="";
-			Scanner input=new Scanner(new File("input.txt"));
-			
-			  while (input.hasNextLine()) {
-	                String line = input.nextLine();
-	                in+=line;
-	                in+="\n";
-	            }
+		
+		String in="";
+		Scanner input=new Scanner(new File("input.txt"));
+		PrintWriter printWriter = new PrintWriter("output.txt");
+		
+		while (input.hasNextLine()) {
+            String line = input.nextLine();
+            in+=line;
+            in+="\n";
+        }
 		Tokenizer tokens=new Tokenizer();
 		ArrayList<Lexeme>res=tokens.run(in);
 		ArrayList<Lexeme> errors = new ArrayList<Lexeme>();
 		int lastIdx = 0;
 		for(int i=0;i<res.size();i++){
-			if(!res.get(i).token.equals("SPACE"))
+			if(!res.get(i).token.equals("SPACE")){
 				System.out.println("<"+res.get(i).token+"> : "+res.get(i).value);
+				printWriter.println("<"+res.get(i).token+"> : "+res.get(i).value);
+			}
 			if(i == 0 && res.get(i).index != 0){
 				errors.add(new Lexeme(0, in.substring(0,res.get(i).index), "ERROR"));
 			}
@@ -40,12 +42,14 @@ public class Main {
 			}
 		}
 		System.out.println("-----------------------------");
+		printWriter.println("-----------------------------");
 		System.out.println("Errors Number: " + errors.size());
+		printWriter.println("Errors Number: " + errors.size());
 		for(int i=0;i<errors.size();i++){
 			System.out.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
-
+			printWriter.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 		}
-		
+		printWriter.close(); input.close();
 	}
 
 }
