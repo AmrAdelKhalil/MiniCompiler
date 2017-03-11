@@ -82,9 +82,8 @@
 <DOUBLE_QOUTES> : "
 <ID> : _amr
 <EOL> : \n
-<COMMENT1> : //
+<COMMENT1> : //sdadsd//mainmainthis
 <ID> : sdadsd
-<COMMENT1> : //
 <ID> : mainmainthis
 <EOL> : \n
 <MAIN> : main

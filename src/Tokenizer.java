@@ -524,11 +524,11 @@ public class Tokenizer {
 
 	public void COMMENT1(String data){
 		
-		pattern = Pattern.compile("\\/\\/");
+		pattern = Pattern.compile("[/][/].*");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "//", "COMMENT1"));
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "COMMENT1"));
 		}
 		
 	}
