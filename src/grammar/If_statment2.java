@@ -3,7 +3,7 @@ package grammar;
 public class If_statment2 implements If_statement{
 	Unmatched unmatched;
 	
-	public If_statment1(Unmatched unmatched){
+	public If_statment2(Unmatched unmatched){
 		this.unmatched = unmatched;
 	}
 	
