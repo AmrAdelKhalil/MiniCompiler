@@ -481,7 +481,7 @@ public class Tokenizer {
 	public void INTEGRAL_LITERAL(String data){
 		
 		//pattern = Pattern.compile("\\b\\d+(?![.\\d])\\b");
-		pattern = Pattern.compile("\\b(?<![.\\d])[+-]?\\d+(?![.\\d])\\b");
+		pattern = Pattern.compile("\\b(?<![.\\d])\\d+(?![.\\d])\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -490,7 +490,7 @@ public class Tokenizer {
 	}
 	public void FLOAT_LITERAL(String data){
 		
-		pattern = Pattern.compile("\\b[-]?\\d+\\.?\\d+\\b");
+		pattern = Pattern.compile("\\b\\d+\\.\\d+\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -524,11 +524,11 @@ public class Tokenizer {
 
 	public void COMMENT1(String data){
 		
-		pattern = Pattern.compile("\\/\\/");
+		pattern = Pattern.compile("[/][/].*");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "//", "COMMENT1"));
+			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "COMMENT1"));
 		}
 		
 	}
