@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class Goal1 implements Goal{
 	
 	MainClass mainClass;
@@ -11,8 +15,21 @@ public class Goal1 implements Goal{
 	}
 	
 	@Override
-	public String getValue() {
-		return mainClass.getValue() +  "(" + classDeclaration.getValue() + ")* <EOF" ;
+	public String getValue(Queue<Lexeme> q) {
+		
+		String result = "";
+		
+	    result = mainClass.getValue(q);
+	    
+	    result+= classDeclaration.getValue(q);
+	    
+	    if(q.size() != 0){
+	    	return "ERROR";
+	    }
+	    
+	    return result;
+	    
 	}
+
 
 }

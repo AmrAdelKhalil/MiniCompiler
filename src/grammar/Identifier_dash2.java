@@ -1,6 +1,5 @@
 package grammar;
 
-import java.beans.Expression;
 
 public class Identifier_dash2 implements Identifier_dash{
 	Expression left,right;
