@@ -8,7 +8,7 @@ public class MethodDeclaration1 implements MethodDeclaration{
 	Statement statement;
 	Expression expression;
 	
-	public MethodDeclaration1(Type type1, Type type2, Identifier identifier1, Identifier identifier2, VarDeclaration varDeclaration, Statment statment, Expression expression) {
+	public MethodDeclaration1(Type type1, Type type2, Identifier identifier1, Identifier identifier2, VarDeclaration varDeclaration, Statement statment, Expression expression) {
 		this.type1 = type1;
 		this.type2 = type2;
 		this.identifier1 = identifier1;
@@ -21,7 +21,7 @@ public class MethodDeclaration1 implements MethodDeclaration{
 	@Override
 	public String getValue() {
 		//there is an if condition on public or private, 2rg3 lel grammer
-		return "(public | private)" + type1.getValue() + identifier1.getValue() + "(" + type2.getValue() + identifier2.getValue() + ")" + "{"  varDeclaration1.getValue() + statement.getValue() + "return" + expression.getValue() + ";" + "}";
+		return "(public | private)" + type1.getValue() + identifier1.getValue() + "(" + type2.getValue() + identifier2.getValue() + ")" + "{" + varDeclaration1.getValue() + statement.getValue() + "return" + expression.getValue() + ";" + "}";
 	}
 
 }
