@@ -11,7 +11,7 @@ public class Statement5 implements Statement {
 	@Override
 	public String getValue() {
 		// TODO Auto-generated method stub
-		return identifier+identifier_dash;
+		return identifier.getValue() + identifier_dash.getValue();
 	}
 	
 
