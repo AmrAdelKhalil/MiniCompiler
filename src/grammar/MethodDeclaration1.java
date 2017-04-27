@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class MethodDeclaration1 implements MethodDeclaration{
 	
 	Type type1, type2;
@@ -18,10 +22,68 @@ public class MethodDeclaration1 implements MethodDeclaration{
 		this.expression = expression;
 	}
 	
+	public String multiParams(Queue<Lexeme> q){
+		
+		String result = "";
+		
+		if(q.peek().equals(",")){
+			result += ",";
+			q.poll();
+			result += type2.getValue(q);
+			result +=  identifier2.getValue(q);
+			result += multiParams(q);
+		}
+		
+		return result;
+	}
+	
 	@Override
-	public String getValue() {
-		//there is an if condition on public or private, 2rg3 lel grammer
-		return "(public | private)" + type1.getValue() + identifier1.getValue() + "(" + type2.getValue() + identifier2.getValue() + ")" + "{" + varDeclaration1.getValue() + statement.getValue() + "return" + expression.getValue() + ";" + "}";
+	public String getValue(Queue<Lexeme> q) {
+		
+		String result = "";
+		
+		if(q.peek().equals("public") || q.peek().equals("private")){
+			result += q.poll();
+			result += type1.getValue(q);
+			result += identifier1.getValue(q);
+			
+			if(q.peek().equals("(")){
+				result += "(";
+				q.poll();
+				result += type2.getValue(q);
+				result += identifier2.getValue(q);
+				result += multiParams(q);
+				
+				if(q.peek().equals(")")){
+					result += ")";
+					q.poll();
+					
+					if(q.peek().equals("{")){
+						result += "{";
+						q.poll();
+						result += varDeclaration1.getValue(q);
+						result += statement.getValue(q);
+						if(q.peek().equals("return")){
+							result += "return";
+							q.poll();
+							
+							result += expression.getValue(q);
+							if(q.peek().equals(";")){
+								result += ";";
+								q.poll();
+								
+								if(q.peek().equals("}")){
+									result += "}";
+									q.poll();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return result;
 	}
 
 }

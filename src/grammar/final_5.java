@@ -1,4 +1,3 @@
-
 package grammar;
 
 public class final_5 implements Final_ {

@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class ClassDeclaration1 implements ClassDeclaration{
 
 	Identifier identifier1;
@@ -15,9 +19,35 @@ public class ClassDeclaration1 implements ClassDeclaration{
 	}
 	
 	@Override
-	public String getValue() {
-		//feh condition 3la extends mn 2wel ( l7d ??
-		return "class" + identifier1.getValue() + "(" + "extends" + identifier2.getValue() + ")?" + "{" + "(" + varDeclaration.getValue() + ") " + "(" + methodDeclaration.getValue() + ") " + "}";
+	public String getValue(Queue<Lexeme> q) {
+		
+		String result = "";
+		
+		if(q.peek().equals("class")){
+			q.poll();
+			result += "class";
+			result += identifier1.getValue(q);
+			
+			if(q.peek().equals("extends")){
+				q.poll();
+				result += "extends";
+				result += identifier2.getValue(q);
+			}
+			
+			if(q.peek().equals("{")){
+				q.poll();
+				result += "{";
+				
+				result += varDeclaration.getValue(q);
+				result += methodDeclaration.getValue(q);
+				
+				if(q.peek().equals("}")){
+					q.poll();
+					result += "}";
+				}
+			}
+		}
+		return result;
 	}
 
 }
