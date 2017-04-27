@@ -1,4 +1,5 @@
 package Tokenizing;
+
 import java.util.Comparator;
 
 public class Lexeme implements Comparator<Lexeme> {

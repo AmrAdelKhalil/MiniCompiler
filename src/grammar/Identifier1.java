@@ -1,4 +1,3 @@
-
 package grammar;
 
 public class Identifier1 implements Identifier {

@@ -17,6 +17,10 @@ public class MainClass1 implements MainClass{
 	}
 
 	@Override
+<<<<<<< HEAD
+	public String getValue() {
+		return "class" + identifier1.getValue() + "{" + "public" + "static" + "void" + "main" + "(" + "String" + "[" + "]" + identifier2.getValue() + ")" + "{" + statement.getValue() + "}" + "}";
+=======
 	public String getValue(Queue<Lexeme> q) {
 		String result = "";
 		
@@ -81,6 +85,7 @@ public class MainClass1 implements MainClass{
 			}
 		}
 	 return result;
+>>>>>>> e12e0b1779cb8c63c94990a97533aa13a2a60a96
 	}
 	
 }
