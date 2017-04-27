@@ -15,12 +15,16 @@ public class Statement3 implements Statement {
 	public String getValue(Queue<Lexeme>q) {
 		String result ="";
 		if (q.peek().value.equals("while")){
-			result += q.poll();
-			result += expression.getValue(q);
-			if (q.peek().value.equals(")"))
+			result = q.poll().value;
+			if (q.peek().value.equals("("))
 			{
-				result += q.poll();
-				result += statement.getValue(q);
+				result += q.poll().value;
+				result += expression.getValue(q);
+				if (q.peek().value.equals(")"))
+				{
+					result += q.poll().value;
+					result += statement.getValue(q);
+				}
 			}
 		}
 		return result;

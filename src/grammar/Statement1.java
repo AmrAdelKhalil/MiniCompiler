@@ -14,10 +14,10 @@ public class Statement1 implements Statement {
 		String result = "";
 		if (q.peek().value.equals("{"))
 		{	
-			result += q.poll();
+			result += q.poll().value;
 			result += statement.getValue(q);
 			if (q.peek().value == "}")
-				result += q.poll();
+				result += q.poll().value;
 		}
 		return result;
 	}

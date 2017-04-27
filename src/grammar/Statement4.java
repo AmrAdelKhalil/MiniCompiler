@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class Statement4 implements Statement {
 	Expression expression;
 	
@@ -11,14 +15,17 @@ public class Statement4 implements Statement {
 		String result = "";
 		if(q.peek().value.equals("System.out.println"))
 		{
-			result = q.poll();
-			if(q.peek().value.equals("(")){
-				result += q.poll();	
+			result = q.poll().value;
+			if(q.peek().value.equals("("))
+			{
+				result += q.poll().value;	
 				result += expression.getValue(q);
-				if(q.peek().value.equals(")")){
-					result += q.poll();	
-					if(q.peek().value.equals(";")){
-						result += q.poll();	
+				if(q.peek().value.equals(")"))
+				{
+					result += q.poll().value;	
+					if(q.peek().value.equals(";"))
+					{
+						result += q.poll().value;	
 					}
 				}
 			}
