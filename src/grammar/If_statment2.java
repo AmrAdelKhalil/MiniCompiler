@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class If_statment2 implements If_statement{
 	Unmatched unmatched;
 	
@@ -8,8 +12,7 @@ public class If_statment2 implements If_statement{
 	}
 	
 	@Override
-	public String getValue() {
-		return unmatched.getValue();
+	public String getValue(Queue<Lexeme>q) {
+		return unmatched.getValue(q);
 	}
-
 }
