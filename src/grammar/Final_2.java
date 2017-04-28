@@ -15,5 +15,4 @@ public class Final_2 implements Final_ {
 		}
 		return "";
 	}
-
 }

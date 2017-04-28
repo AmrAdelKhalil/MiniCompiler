@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class Statement5 implements Statement {
 	Identifier  identifier;
 	Identifier_dash identifier_dash;
@@ -9,9 +13,9 @@ public class Statement5 implements Statement {
 		this.identifier_dash = identifier_dash;
 	}
 	@Override
-	public String getValue() {
+	public String getValue(Queue<Lexeme>q) {
 		// TODO Auto-generated method stub
-		return identifier.getValue() + identifier_dash.getValue();
+		return identifier.getValue(q) + identifier_dash.getValue(q);
 	}
 	
 

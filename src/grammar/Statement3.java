@@ -1,4 +1,7 @@
 package grammar;
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
 
 public class Statement3 implements Statement {
 	Expression expression;
@@ -8,10 +11,21 @@ public class Statement3 implements Statement {
 		this.statement = statement;
 	}
 	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return "while(" + expression.getValue()+")"+statement.getValue();
+	public String getValue(Queue<Lexeme>q) {
+		String result ="";
+		if (q.peek().value.equals("while")){
+			result = q.poll().value;
+			if (q.peek().value.equals("("))
+			{
+				result += q.poll().value;
+				result += expression.getValue(q);
+				if (q.peek().value.equals(")"))
+				{
+					result += q.poll().value;
+					result += statement.getValue(q);
+				}
+			}
+		}
+		return result;
 	}
-	
-
 }

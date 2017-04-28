@@ -1,4 +1,3 @@
-
 package grammar;
 
 import java.util.Queue;
@@ -14,7 +13,7 @@ public class Identifier1 implements Identifier {
 	}
 	@Override
 	public String getValue(Queue<Lexeme> q) {
-		
+	
 		return token;
 	}
 

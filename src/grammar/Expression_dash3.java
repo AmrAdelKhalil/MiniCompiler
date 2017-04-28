@@ -20,6 +20,7 @@ public class Expression_dash3 implements Expression_dash {
 			res += dotDash.getValue(q);
 		}
 		return res;
+
 	}
 
 }

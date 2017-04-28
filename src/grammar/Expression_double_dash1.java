@@ -4,6 +4,7 @@ import java.util.Queue;
 
 import Tokenizing.Lexeme;
 
+
 public class Expression_double_dash1 implements Expression_double_dash {
 
 	Expression_double_dash EDD;
@@ -18,6 +19,7 @@ public class Expression_double_dash1 implements Expression_double_dash {
 	public String getValue(Queue<Lexeme> q) {
 		
 		return ED.getValue(q) + EDD.getValue(q);
+
 	}
 
 }

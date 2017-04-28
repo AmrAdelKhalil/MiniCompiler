@@ -6,4 +6,5 @@ import Tokenizing.Lexeme;
 
 public interface Expression_double_dash {
 	public String getValue(Queue<Lexeme> q);
+
 }

@@ -4,6 +4,7 @@ import java.util.Queue;
 
 import Tokenizing.Lexeme;
 
+
 public class Expression1 implements Expression {
 
 	Final_ F;
@@ -20,6 +21,7 @@ public class Expression1 implements Expression {
 		res += F.getValue(q);
 		res += EDD.getValue(q);
 		return res;
+
 	}
 
 }

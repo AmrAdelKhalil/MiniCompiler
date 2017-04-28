@@ -1,5 +1,6 @@
 package grammar;
 
+
 import java.util.Queue;
 
 import Tokenizing.Lexeme;
@@ -17,6 +18,7 @@ public class Dot_dash2 implements Dot_dash {
 	}
 	
 	@Override
+
 	public String getValue(Queue<Lexeme> q) {
 		String res = "";
 		res += id.getValue(q);
@@ -34,6 +36,7 @@ public class Dot_dash2 implements Dot_dash {
 			}
 		}
 		return res;
+
 	}
 
 }

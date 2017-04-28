@@ -20,6 +20,7 @@ public class Expression_dash1 implements Expression_dash {
 			res += expr.getValue(q);
 		}
 		return res;
+
 	}
 
 }

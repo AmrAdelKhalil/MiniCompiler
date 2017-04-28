@@ -11,6 +11,7 @@ public class Dot_dash1 implements Dot_dash {
 	}
 	@Override
 	public String getValue(Queue<Lexeme> q) {
+
 		return "length";
 	}
 
