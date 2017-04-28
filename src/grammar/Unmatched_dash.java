@@ -6,5 +6,4 @@ import Tokenizing.Lexeme;
 
 public interface Unmatched_dash {
 	public String getValue(Queue<Lexeme>q);
-	
 }

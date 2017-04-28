@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class final_5 implements Final_ {
 
 	Identifier id;
@@ -9,9 +13,9 @@ public class final_5 implements Final_ {
 	}
 	
 	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return id.getValue();
+	public String getValue(Queue<Lexeme> q) {
+		
+		return id.getValue(q);
 	}
 
 }

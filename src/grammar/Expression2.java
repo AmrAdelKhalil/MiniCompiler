@@ -1,5 +1,10 @@
 package grammar;
 
+
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class Expression2 implements Expression {
 
 	Expression expr;
@@ -11,9 +16,15 @@ public class Expression2 implements Expression {
 	}
 	
 	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return "!" + expr.getValue() + EDD.getValue();
+	public String getValue(Queue<Lexeme> q) {
+		String res = "";
+		if(q.peek().value.equals("!")){
+			q.poll();
+			res += "!";
+			res += expr.getValue(q);
+			res += EDD.getValue(q);
+		}
+		return res;
 	}
 
 }

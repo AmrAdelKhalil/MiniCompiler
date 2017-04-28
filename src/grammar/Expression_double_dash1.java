@@ -1,5 +1,10 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
+
 public class Expression_double_dash1 implements Expression_double_dash {
 
 	Expression_double_dash EDD;
@@ -11,9 +16,10 @@ public class Expression_double_dash1 implements Expression_double_dash {
 	}
 	
 	@Override
-	public String getValue() {
+	public String getValue(Queue<Lexeme> q) {
 		
-		return ED.getValue() + EDD.getValue();
+		return ED.getValue(q) + EDD.getValue(q);
+
 	}
 
 }

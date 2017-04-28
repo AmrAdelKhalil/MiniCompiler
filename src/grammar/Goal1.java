@@ -4,6 +4,7 @@ import java.util.Queue;
 
 import Tokenizing.Lexeme;
 
+
 public class Goal1 implements Goal{
 	
 	MainClass mainClass;
@@ -30,6 +31,4 @@ public class Goal1 implements Goal{
 	    return result;
 	    
 	}
-
-
 }

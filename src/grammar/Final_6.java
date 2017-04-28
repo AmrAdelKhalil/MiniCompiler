@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class Final_6 implements Final_{
 
 	New_dash ND;
@@ -9,9 +13,14 @@ public class Final_6 implements Final_{
 	}
 	
 	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return "new" + ND.getValue();
+	public String getValue(Queue<Lexeme> q) {
+		String res = "";
+		if(q.peek().value.equals("new")){
+			q.poll();
+			res += "new";
+			res += ND.getValue(q);
+		}
+		return res;
 	}
 
 }

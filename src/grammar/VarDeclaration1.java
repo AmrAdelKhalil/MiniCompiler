@@ -26,7 +26,5 @@ public class VarDeclaration1 implements VarDeclaration{
 			result += getValue(q);
 		}
 		return result;
-	}
-	
-	
+	}	
 }

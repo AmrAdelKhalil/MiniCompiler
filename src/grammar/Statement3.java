@@ -1,5 +1,4 @@
 package grammar;
-
 import java.util.Queue;
 
 import Tokenizing.Lexeme;
@@ -29,5 +28,4 @@ public class Statement3 implements Statement {
 		}
 		return result;
 	}
-
 }

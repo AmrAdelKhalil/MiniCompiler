@@ -1,5 +1,9 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
 public class Expression_dash1 implements Expression_dash {
 	
 	Expression expr;
@@ -9,9 +13,14 @@ public class Expression_dash1 implements Expression_dash {
 	}
 	
 	@Override
-	public String getValue() {
-		return " ( && | < | + | - | * )" + expr.getValue();
-		// need to handle
+	public String getValue(Queue<Lexeme> q) {
+		String res = "";
+		if(q.peek().value.equals("&&") || q.peek().value.equals("<") || q.peek().value.equals("+") || q.peek().value.equals("-") || q.peek().value.equals("*") ){
+			res += q.poll().value;
+			res += expr.getValue(q);
+		}
+		return res;
+
 	}
 
 }

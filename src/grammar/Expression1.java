@@ -1,5 +1,10 @@
 package grammar;
 
+import java.util.Queue;
+
+import Tokenizing.Lexeme;
+
+
 public class Expression1 implements Expression {
 
 	Final_ F;
@@ -11,9 +16,12 @@ public class Expression1 implements Expression {
 	}
 	
 	@Override
-	public String getValue() {
-		
-		return F.getValue() + EDD.getValue();
+	public String getValue(Queue<Lexeme> q) {
+		String res = "";
+		res += F.getValue(q);
+		res += EDD.getValue(q);
+		return res;
+
 	}
 
 }

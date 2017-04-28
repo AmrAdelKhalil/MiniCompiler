@@ -1,7 +1,5 @@
 package grammar;
-
 import java.util.Queue;
-
 import Tokenizing.Lexeme;
 
 public class Type10 implements Type{

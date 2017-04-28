@@ -1,5 +1,6 @@
 package grammar;
 
+
 import java.util.Queue;
 
 import Tokenizing.Lexeme;
@@ -26,6 +27,7 @@ public class Type1 implements Type {
 			}
 		}
 		return result;
+
 	}
 	
 }

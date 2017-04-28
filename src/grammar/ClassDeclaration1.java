@@ -4,6 +4,7 @@ import java.util.Queue;
 
 import Tokenizing.Lexeme;
 
+
 public class ClassDeclaration1 implements ClassDeclaration{
 
 	Identifier identifier1;
@@ -48,6 +49,7 @@ public class ClassDeclaration1 implements ClassDeclaration{
 			}
 		}
 		return result;
+
 	}
 
 }

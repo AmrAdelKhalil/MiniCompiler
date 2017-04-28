@@ -15,7 +15,7 @@ public class Statement5 implements Statement {
 	@Override
 	public String getValue(Queue<Lexeme>q) {
 		// TODO Auto-generated method stub
-		return identifier.getValue() + identifier_dash.getValue();
+		return identifier.getValue(q) + identifier_dash.getValue(q);
 	}
 	
 
