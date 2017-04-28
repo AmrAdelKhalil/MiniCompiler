@@ -1,3 +1,4 @@
+package Tokenizing;
 import java.util.ArrayList;
 import java.util.regex.*;
 
@@ -8,7 +9,6 @@ public class Tokenizer {
 	public ArrayList<Lexeme> lexemes = new ArrayList<>();
 	
 	public ArrayList<Lexeme> run(String data){
-		EOL(data);
 		PLUS(data);
 		open_curly_praces(data);
 		close_curly_praces(data);
@@ -23,7 +23,7 @@ public class Tokenizer {
 		equal(data);
 		logic_and(data);
 		minus(data);
-		mul(data);
+		
 		less_than(data);
 		greater_than(data);
 		if_condition(data);
@@ -59,11 +59,40 @@ public class Tokenizer {
 		SYSTEM_OUT_PRINTLN(data);
 		COMMENT1(data);
 		SPACE(data);
-		
+		mul(data);
+		EOL(data);
+
 		lexemes.sort(new Lexeme());
+		removeDublicates();
 		return lexemes;
 	}
 	
+	public void removeDublicates(){
+		int iStart, iEnd;
+		int jStart, jEnd;
+		for (int i = 0 ; i < lexemes.size(); i++){
+			iStart = lexemes.get(i).index;
+			if (lexemes.get(i).token.equals("EOL")){
+				iEnd = iStart + 1;
+			}else {
+				iEnd = lexemes.get(i).index+lexemes.get(i).value.length();
+			}
+			
+			for(int j = i+1 ; j < lexemes.size() ; j++){
+				jStart = lexemes.get(j).index;
+				if (lexemes.get(j).token.equals("EOL")){
+					jEnd = jStart + 1;
+				}else {
+					jEnd = lexemes.get(j).index+lexemes.get(j).value.length();
+				}
+				if (iStart <= jStart &&
+						iEnd >= jEnd){
+					lexemes.remove(j);
+					j--;
+				}
+			}
+		}
+	}
 	public void EOL(String data){
 		
 		pattern = Pattern.compile("\n");
@@ -88,7 +117,7 @@ public class Tokenizer {
 	
 	public  void open_curly_praces(String data){
 		
-		pattern = Pattern.compile("\\{");
+		pattern = Pattern.compile("[{]");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -99,7 +128,7 @@ public class Tokenizer {
 	
 	public void close_curly_praces(String data){
 		
-		pattern = Pattern.compile("\\}");
+		pattern = Pattern.compile("[}]");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -232,7 +261,7 @@ public class Tokenizer {
 	
 	public void mul(String data){
 		
-		pattern = Pattern.compile("\\b\\*(\\b|[\\n])");
+		pattern = Pattern.compile("\\*");
 		matcher = pattern.matcher(data);
 		
 		while(matcher.find()){
@@ -421,11 +450,11 @@ public class Tokenizer {
 	}
 	public void STRING(String data){
 
-		pattern = Pattern.compile("(^|[ ;])String[ ]");
+		pattern = Pattern.compile("\\bString\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
-			lexemes.add(new Lexeme(matcher.start(), "string", "STRING"));
+			lexemes.add(new Lexeme(matcher.start(), "String", "STRING"));
 		}
 		
 	}
@@ -481,7 +510,7 @@ public class Tokenizer {
 	public void INTEGRAL_LITERAL(String data){
 		
 		//pattern = Pattern.compile("\\b\\d+(?![.\\d])\\b");
-		pattern = Pattern.compile("\\b(?<![.\\d])\\d+(?![.\\d])\\b");
+		pattern = Pattern.compile("\\b(?<![.])\\d+(?![.])\\b");
 		matcher = pattern.matcher(data);
 		
 		while (matcher.find()) {
@@ -517,7 +546,7 @@ public class Tokenizer {
 			   matcher.group().equals("else") || matcher.group().equals("void") || matcher.group().equals("static")
 			   || matcher.group().equals("class")|| matcher.group().equals("this") || matcher.group().equals("while")
 			   || matcher.group().equals("Character") || matcher.group().equals("main") || matcher.group().equals("public")
-			   || matcher.group().equals("new") || matcher.group().equals("extends"))continue;
+			   || matcher.group().equals("new") || matcher.group().equals("extends") || matcher.group().equals("return") ||matcher.group().equals("length") )continue;
 			lexemes.add(new Lexeme(matcher.start(), matcher.group(), "ID"));
 		}
 	}
