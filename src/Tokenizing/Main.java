@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -21,11 +23,13 @@ public class Main {
 		Tokenizer tokens=new Tokenizer();
 		ArrayList<Lexeme>res=tokens.run(in);
 		ArrayList<Lexeme> errors = new ArrayList<Lexeme>();
+		Queue<Lexeme> Tokens = new LinkedList<Lexeme>();
 		int lastIdx = 0;
 		for(int i=0;i<res.size();i++){
 			if(!res.get(i).token.equals("SPACE")){
 				System.out.println("<"+res.get(i).token+"> : "+res.get(i).value);
 				printWriter.println("<"+res.get(i).token+"> : "+res.get(i).value);
+				Tokens.add(res.get(i));
 			}
 			if(i == 0 && res.get(i).index != 0){
 				errors.add(new Lexeme(0, in.substring(0,res.get(i).index), "ERROR"));
@@ -42,14 +46,17 @@ public class Main {
 				lastIdx = res.get(i).index + res.get(i).value.length();
 			}
 		}
+		/*
 		System.out.println("-----------------------------");
 		printWriter.println("-----------------------------");
 		System.out.println("Errors Number: " + errors.size());
 		printWriter.println("Errors Number: " + errors.size());
+		
 		for(int i=0;i<errors.size();i++){
 			System.out.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 			printWriter.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
-		}
+		}*/
+		
 		printWriter.close(); input.close();
 	}
 
