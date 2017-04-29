@@ -21,10 +21,7 @@ public class VarDeclaration1 implements VarDeclaration{
 		result += type.getValue(q);
 		result += identifier.getValue(q);
 		
-		if(q.peek().equals(";")){
-			q.poll();
-			result += getValue(q);
-		}
+		result += ";";
 		return result;
 	}	
 }

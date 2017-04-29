@@ -20,66 +20,23 @@ public class MainClass1 implements MainClass{
 	public String getValue(Queue<Lexeme> q) {
 		String result = "";
 		
-		if(q.peek().value.equals("class")){
-			q.poll();
 			result += "class";
 			result += identifier1.getValue(q);
-			if(q.peek().value.equals("{")){
-				q.poll();
 				result += "{";
-				if(q.peek().value.equals("public")){
-					q.poll();
 					result += "public";
-					if(q.peek().value.equals("static")){
-						q.poll();
 						result += "static";
-						if(q.peek().value.equals("void")){
-							q.poll();
 							result += "void";
-							if(q.peek().value.equals("main")){
-								q.poll();
 								result += "main";
-								if(q.peek().value.equals("(")){
-									q.poll();
 									result += "(";
-									if(q.peek().value.equals("String")){
-										q.poll();
 										result += "String";
-										if(q.peek().value.equals("[")){
-											q.poll();
 											result += "[";
-											if(q.peek().value.equals("]")){
-												q.poll();
 												result += "]";
 												result += identifier2.getValue(q);
-												if(q.peek().value.equals(")")){
-													q.poll();
 													result += ")";
-													if(q.peek().value.equals("{")){
-														q.poll();
 														result += "{";
 														result += statement.getValue(q);
-														if(q.peek().value.equals("}")){
-															q.poll();
 															result += "}";
-															if(q.peek().value.equals("}")){
-																q.poll();
 																result += "}";
-																result += getValue(q);
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 	 return result;
 	}
 	

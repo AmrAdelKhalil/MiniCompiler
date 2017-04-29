@@ -18,12 +18,10 @@ public class Expression2 implements Expression {
 	@Override
 	public String getValue(Queue<Lexeme> q) {
 		String res = "";
-		if(q.peek().value.equals("!")){
-			q.poll();
 			res += "!";
 			res += expr.getValue(q);
 			res += EDD.getValue(q);
-		}
+		
 		return res;
 	}
 

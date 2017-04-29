@@ -13,19 +13,14 @@ public class Statement3 implements Statement {
 	@Override
 	public String getValue(Queue<Lexeme>q) {
 		String result ="";
-		if (q.peek().value.equals("while")){
-			result = q.poll().value;
-			if (q.peek().value.equals("("))
-			{
-				result += q.poll().value;
-				result += expression.getValue(q);
-				if (q.peek().value.equals(")"))
-				{
-					result += q.poll().value;
-					result += statement.getValue(q);
-				}
-			}
-		}
+		result = "while";
+
+		result += "(";
+		result += expression.getValue(q);
+	
+		result += ")";
+		result += statement.getValue(q);
+			
 		return result;
 	}
 }

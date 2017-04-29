@@ -14,27 +14,16 @@ public class Matched1 implements Matched{
 	}
 	@Override
 	public String getValue(Queue<Lexeme>q) {
-		String result = "";
-		if (q.peek().value.equals("if"))
-		{
-			result = q.poll().value;
-			if(q.peek().value.equals("("))
-			{
-				result += q.poll().value;
-				result += expression.getValue(q);
-				if(q.peek().value.equals(")"))
-				{
-					result += q.poll().value;
-					result += left.getValue(q);
-					if(q.peek().value.equals("else"))
-					{
-						result += q.poll().value;
-						result += right.getValue(q);
-					}
-				}
-			}
-				
-		}
+		String result = "if";
+		result += "(";
+		result += expression.getValue(q);
+		
+		result += ")";
+		result += left.getValue(q);
+		
+		result += "else";
+		result += right.getValue(q);
+		
 		return result;
 	}
 	

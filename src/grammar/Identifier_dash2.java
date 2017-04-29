@@ -10,25 +10,13 @@ public class Identifier_dash2 implements Identifier_dash{
 	}
 	@Override
 	public String getValue(Queue<Lexeme>q) {
-		String result = "";
-		if(q.peek().value.equals("["))
-		{
-			result += q.poll().value;
-			result += left.getValue(q);
-			if(q.peek().value.equals("]"))
-			{
-				result += q.poll().value;
-			}
-		}
-		if(q.peek().value.equals("="))
-		{
-			result += q.poll().value;
-			result += right.getValue(q);
-			if(q.peek().value.equals(";"))
-			{
-				result += q.poll().value;
-			}
-		}
+		String result = "[";
+		result += left.getValue(q);
+		result += "]";	
+		result += "=";
+		result += right.getValue(q);
+		result += ";";
+			
 		return result;
 	}
 

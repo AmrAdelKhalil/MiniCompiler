@@ -12,20 +12,12 @@ public class Type1 implements Type {
 		
 		String result = "";
 		
-		if(q.peek().equals("int")){
-			result += "int";
-			q.poll();
+		result += "int";
 			
-			if(q.peek().equals("[")){
-				result += "[";
-				q.poll();
+		result += "[";
+	
+		result += "]";
 				
-				if(q.peek().equals("]")){
-					result += "]";
-					q.poll();
-				}
-			}
-		}
 		return result;
 
 	}

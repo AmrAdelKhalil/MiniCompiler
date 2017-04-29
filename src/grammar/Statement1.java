@@ -12,13 +12,10 @@ public class Statement1 implements Statement {
 	@Override
 	public String getValue(Queue<Lexeme>q) {
 		String result = "";
-		if (q.peek().value.equals("{"))
-		{	
-			result += q.poll().value;
-			result += statement.getValue(q);
-			if (q.peek().value == "}")
-				result += q.poll().value;
-		}
+			
+		result += "{";
+		result += statement.getValue(q);
+		result += "}";
 		return result;
 	}
 	

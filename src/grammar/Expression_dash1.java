@@ -7,18 +7,17 @@ import Tokenizing.Lexeme;
 public class Expression_dash1 implements Expression_dash {
 	
 	Expression expr;
-	
-	public Expression_dash1(Expression expr) {
+	String Token;
+	public Expression_dash1(String Token , Expression expr) {
 		this.expr = expr;
+		this.Token = Token;
 	}
 	
 	@Override
 	public String getValue(Queue<Lexeme> q) {
-		String res = "";
-		if(q.peek().value.equals("&&") || q.peek().value.equals("<") || q.peek().value.equals("+") || q.peek().value.equals("-") || q.peek().value.equals("*") ){
-			res += q.poll().value;
-			res += expr.getValue(q);
-		}
+		String res = Token;
+		res += expr.getValue(q);
+		
 		return res;
 
 	}
