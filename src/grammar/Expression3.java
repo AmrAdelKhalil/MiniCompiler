@@ -18,16 +18,10 @@ public class Expression3 implements Expression {
 	@Override
 	public String getValue(Queue<Lexeme> q) {
 		String res = "";
-		if(q.peek().value.equals("(")){
-			q.poll();
-			res += "(";
-			res += expr.getValue(q);
-			if(q.peek().value.equals("")){
-				q.poll();
-				res += ")";
-				res += EDD.getValue(q);
-			}	
-		}
+		res += "(";
+		res += expr.getValue(q);
+		res += ")";
+		res += EDD.getValue(q);
 		return res;
 
 	}

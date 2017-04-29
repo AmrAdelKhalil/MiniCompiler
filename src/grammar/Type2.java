@@ -10,10 +10,7 @@ public class Type2 implements Type{
 	public String getValue(Queue<Lexeme> q) {
 		String result = "";
 		
-		if(q.peek().equals("boolean")){
-			result += "boolean";
-			q.poll();
-		}
+		result += "boolean";
 		return result;
 	}
 

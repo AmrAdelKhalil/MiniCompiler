@@ -25,34 +25,23 @@ public class ClassDeclaration1 implements ClassDeclaration{
 		
 		String result = "";
 		
-		if(q.peek().equals("class")){
-			q.poll();
 			result += "class";
 			result += identifier1.getValue(q);
-			
-			if(q.peek().equals("extends")){
-				q.poll();
+				if(identifier2 != null){
 				result += "extends";
 				result += identifier2.getValue(q);
-			}
-			
-			if(q.peek().equals("{")){
-				q.poll();
+				}
 				result += "{";
+				
 				for (int i = 0 ; i < varDeclaration.size() ; i++){
 					result += varDeclaration.get(i).getValue(q);
 				}
-
-				for (int i = 0 ; i < varDeclaration.size() ; i++){
+				for (int i = 0 ; i < methodDeclaration.size() ; i++){
 					result += methodDeclaration.get(i).getValue(q);
 				}
 				
-				if(q.peek().equals("}")){
-					q.poll();
 					result += "}";
-				}
-			}
-		}
+		
 		return result;
 
 	}

@@ -72,6 +72,10 @@ public class Tokenizer {
 		int iStart, iEnd;
 		int jStart, jEnd;
 		for (int i = 0 ; i < lexemes.size(); i++){
+			if(lexemes.get(i).value.equals("System")){
+				lexemes.remove(i);
+				i--;
+			}
 			iStart = lexemes.get(i).index;
 			if (lexemes.get(i).token.equals("EOL")){
 				iEnd = iStart + 1;

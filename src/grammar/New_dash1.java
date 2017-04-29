@@ -15,19 +15,11 @@ public class New_dash1 implements New_dash {
 	@Override
 	public String getValue(Queue<Lexeme> q) {
 		String res = "";
-		if(q.peek().value.equals("int")){
-			q.poll();
-			res += "int";
-			if(q.peek().value.equals("[")){
-				q.poll();
-				res += " [";
-				res += expr.getValue(q);
-				if(q.peek().value.equals("]")){
-					q.poll();
-					res += "]";
-				}
-			}
-		}
+		res += "int";
+		res += " [";
+		res += expr.getValue(q);
+		res += "]";
+				
 		return res;
 	}
 

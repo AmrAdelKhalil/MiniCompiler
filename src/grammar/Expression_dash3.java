@@ -14,11 +14,10 @@ public class Expression_dash3 implements Expression_dash {
 	
 	@Override
 	public String getValue(Queue<Lexeme> q) {
-		String res = "";
-		if(q.peek().value.equals(".")){
-			res += q.poll().value;
-			res += dotDash.getValue(q);
-		}
+		String res = ".";
+		
+		res += dotDash.getValue(q);
+		
 		return res;
 
 	}

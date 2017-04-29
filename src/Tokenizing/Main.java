@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+import grammar.Goal;
+
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -29,7 +31,9 @@ public class Main {
 			if(!res.get(i).token.equals("SPACE")){
 				System.out.println("<"+res.get(i).token+"> : "+res.get(i).value);
 				printWriter.println("<"+res.get(i).token+"> : "+res.get(i).value);
-				Tokens.add(res.get(i));
+				if(!res.get(i).value.equals("\\n"))
+					
+					Tokens.add(res.get(i));
 			}
 			if(i == 0 && res.get(i).index != 0){
 				errors.add(new Lexeme(0, in.substring(0,res.get(i).index), "ERROR"));
@@ -56,7 +60,9 @@ public class Main {
 			System.out.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 			printWriter.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 		}*/
-		
+		Parser p = new Parser(Tokens);
+		Goal goal = p.goal1();
+		System.out.println(goal.getValue(Tokens));
 		printWriter.close(); input.close();
 	}
 

@@ -24,10 +24,6 @@ public class Goal1 implements Goal{
 	    
 	    result+= classDeclaration.getValue(q);
 	    
-	    if(q.size() != 0){
-	    	return "ERROR";
-	    }
-	    
 	    return result;
 	    
 	}

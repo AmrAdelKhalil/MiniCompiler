@@ -9,20 +9,12 @@ public class Type10 implements Type{
 		
 		String result = "";
 				
-		if(q.peek().equals("boolean")){
-			result += "boolean";
-			q.poll();
+		result += "boolean";
 			
-			if(q.peek().equals("[")){
-				result += "[";
-				q.poll();
+		result += "[";
 				
-				if(q.peek().equals("]")){
-					result += "]";
-					q.poll();
-				}
-			}
-		}
+		result += "]";
+				
 		return result;
 	}
 	

@@ -14,12 +14,9 @@ public class Final_6 implements Final_{
 	
 	@Override
 	public String getValue(Queue<Lexeme> q) {
-		String res = "";
-		if(q.peek().value.equals("new")){
-			q.poll();
-			res += "new";
-			res += ND.getValue(q);
-		}
+		String res = "";	
+		res += "new";
+		res += ND.getValue(q);
 		return res;
 	}
 
