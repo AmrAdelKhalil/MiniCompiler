@@ -16,7 +16,6 @@ public class Parser {
 	public Goal1 goal1() {
 		MainClass1 mainClass = mainClass();
 		ClassDeclaration1 classdeclaration = classdeclaration();
-		//System.out.println(classdeclaration);
 		return new Goal1(mainClass, classdeclaration);
 	}
 
@@ -78,7 +77,6 @@ public class Parser {
 			Identifier identefier1 = identefier();
 
 			Identifier identefier2 = null;
-			// handle null in class declration
 			if (Tokens.peek().value.equals("extends")) {
 				Tokens.poll();
 				identefier2 = identefier();
@@ -96,17 +94,13 @@ public class Parser {
 				
 				ArrayList<MethodDeclaration1> methodDeclaration1 = new ArrayList<MethodDeclaration1>();
 				MethodDeclaration1 methodDeclarationElement = methodDeclaration1();
-				//System.out.println(Tokens.peek().value +"   jj ");
 				while (methodDeclarationElement != null) {
 					methodDeclaration1.add(methodDeclarationElement);
 					methodDeclarationElement = methodDeclaration1();
-				//	System.out.println(methodDeclarationElement);
 				}
-				//System.out.println(methodDeclaration1.size());
 				
 				if (Tokens.peek().value.equals("}")) {
 					Tokens.poll();
-				//	System.out.println(varDeclaration1.size()+" "+methodDeclaration1.get(0).getValue(Tokens));
 					return new ClassDeclaration1(identefier1, identefier2, varDeclaration1, methodDeclaration1);
 				}
 			}
@@ -115,7 +109,6 @@ public class Parser {
 	}
 
 	public Identifier identefier() {
-	//	System.out.println(Tokens.peek().index+" "+Tokens.peek().value +" "+Tokens.peek().token +" id");
 		if (!Tokens.peek().token.equals("ID"))
 			return null;
 		return new Identifier1(Tokens.poll().value);
@@ -179,42 +172,45 @@ public class Parser {
 	}
 
 	public If_statement if_statement() {
-		Expression expression = matchedAndUnMatched();
-			Matched matched = matched(expression);
-			System.out.println("maatced" +" "+Tokens.peek().value+" "+matched);
+			Matched matched = matched();
 			if (matched == null) {
-				
-				Unmatched unmatched = unmatched(expression);
+				Unmatched unmatched = unmatched();
 				return new If_statment2(unmatched);
 			}
 			return new If_statment1(matched);
 	}
-
-	public Unmatched unmatched(Expression expression) {
-		System.out.println("unmaatced" +" "+Tokens.peek().value);
-		Unmatched_dash unmatched_dash = unmatched_dash();
+	public Unmatched unmatched(){
 		
-		if (unmatched_dash != null)
-			return new Unmatched1(expression, unmatched_dash);
+		if (Tokens.peek().value.equals("if")) {
+			Tokens.poll();
+			if (Tokens.peek().value.equals("(")) {
+				Tokens.poll();
+				Expression expression = expression();
+				System.out.println(expression.getValue(Tokens));
+				if(expression != null)
+				{
+					if (Tokens.peek().value.equals(")")) {
+						Tokens.poll();
+						Unmatched_dash unmatched_dash = unmatched_dash();
+						if (unmatched_dash != null)
+							return new Unmatched1(expression, unmatched_dash);
+					}
+				}
+			}
+		}
 		return null;
 	}
-
 	public Unmatched_dash unmatched_dash() {
-		System.out.println(Tokens.peek().value+" 8");
 		Statement statement = statement();
 		if (statement != null)
 			return new Unmatched_dash1(statement);
-		Expression expression1 = matchedAndUnMatched();
-		Matched matched = matched(expression1);
+		Matched matched = matched();
 		if (matched != null) {
 			
 			if (Tokens.peek().value.equals("else")) {
 				Tokens.poll();
-				Expression expression2 = matchedAndUnMatched();
-				Unmatched unmatched = unmatched(expression2);
-				
-				if (unmatched != null) {
-					
+				Unmatched unmatched = unmatched();
+				if (unmatched != null) {	
 					return new Unmatched_dash2(matched, unmatched);
 				}
 			}
@@ -222,46 +218,61 @@ public class Parser {
 		return null;
 	}
 
-	public Expression matchedAndUnMatched() {
+	
+	public Matched matched(){
+		
+		Queue<Lexeme>tmp = new LinkedList<Lexeme>();
+		Queue<Lexeme>newTokens = new LinkedList<Lexeme>();
+		while(Tokens.size() > 0)
+		{	
+			tmp.add(Tokens.peek());
+			newTokens.add(Tokens.poll());
+			
+		}
+		while(tmp.size() > 0)
+			Tokens.add(tmp.poll());
+		String tmpo="";
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
 				Expression expression = expression();
-				if (Tokens.peek().value.equals(")")) {
-					Tokens.poll();
-					return expression;
-				}
-			}
-		}
-		return null;
-	}
-
-	public Matched matched(Expression expression) {
-		Expression expression1 = matchedAndUnMatched();
-		if (expression != null) {
-			Matched matched1 = matched(expression1);
-			if(matched1 !=null)
-			{
-				if (Tokens.peek().value.equals("else")) {
-					Tokens.poll();
-					Expression expression2 = matchedAndUnMatched();
-				//	System.out.println(expression2 +" "+Tokens.peek().value+ " amora");
-					Matched matched2 = matched(expression2);
-					if (matched2 != null) {
+				System.out.println(expression.getValue(Tokens) +" awl");
+				if(expression != null){
+					if (Tokens.peek().value.equals(")")) {
+						Tokens.poll();
 						
-						return new Matched1(expression, matched1, matched2);
+						Matched matched1 = matched();	
+						if(matched1 != null)
+						{System.out.println(matched1.getValue(Tokens)+" talt");
+							tmpo = matched1.getValue(Tokens)+" talt";
+							if(Tokens.peek().value.equals("else"))
+							{
+								Tokens.poll();
+								Matched matched2 = matched();
+								if (matched2 != null) {
+									System.out.println(tmpo+ " "+matched2.getValue(Tokens)+" rabe3");
+									return new Matched1(expression, matched1, matched2);
+								}
+							}
+						}
 					}
-	
 				}
 			}
 		}
 		Statement statement = statement();
-		if(statement != null)
-			return new Matched2(statement);
+		if(statement != null){
+			System.out.println(statement.getValue(Tokens) +" tani");
+			return new Matched2(statement);}
+		System.out.println(tmpo);
+		while(Tokens.size() > 0)
+			Tokens.poll();
+		
+		while(newTokens.size() > 0)
+			Tokens.add(newTokens.poll());
+		
 		return null;
 	}
-
 	public Identifier_dash identifier_dash() {
 		if (Tokens.peek().value.equals("=")) {
 			Tokens.poll();
@@ -319,7 +330,6 @@ public class Parser {
 			token = Tokens.poll().value;
 			Type type = type();
 			Identifier identefier = identefier();
-		//	System.out.println(identefier.getValue(Tokens));
 			ArrayList<Type> types = new ArrayList<>();
 			ArrayList<Identifier> identifiers = new ArrayList<>();
 			types.add(type);
@@ -336,9 +346,7 @@ public class Parser {
 					types.add(type1);
 					identifiers.add(identifier1);
 					multiParams(types, identifiers);
-				//	System.out.println(types.size()+" "+identifiers.size());
 				}
-			//	System.out.println(Tokens.peek().value);
 				if (Tokens.peek().value.equals(")")) {
 					Tokens.poll();
 					if (Tokens.peek().value.equals("{")) {
@@ -351,11 +359,9 @@ public class Parser {
 						}
 						ArrayList<Statement> statement1 = new ArrayList<Statement>();
 						Statement statementElement = statement();
-						//System.out.println(statementElement.getValue(Tokens)+ " "+Tokens.peek().value);
 						while (statementElement != null) {
 							statement1.add(statementElement);
 							statementElement = statement();
-							//System.out.println(statementElement);
 						}
 						if (Tokens.peek().value.equals("return")) {
 							Tokens.poll();
