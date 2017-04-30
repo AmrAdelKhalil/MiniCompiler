@@ -172,11 +172,12 @@ public class Parser {
 	}
 
 	public If_statement if_statement() {
-			Matched matched = matched();
+			Matched matched = matched(0);
 			if (matched == null) {
 				Unmatched unmatched = unmatched();
 				return new If_statment2(unmatched);
 			}
+			System.out.println("afterrrrr "+matched.getValue(Tokens));
 			return new If_statment1(matched);
 	}
 	public Unmatched unmatched(){
@@ -204,7 +205,7 @@ public class Parser {
 		Statement statement = statement();
 		if (statement != null)
 			return new Unmatched_dash1(statement);
-		Matched matched = matched();
+		Matched matched = matched(-10);
 		if (matched != null) {
 			
 			if (Tokens.peek().value.equals("else")) {
@@ -219,16 +220,21 @@ public class Parser {
 	}
 
 	
-	public Matched matched(){
+	public Matched matched(int i){
 		
 		Queue<Lexeme>tmp = new LinkedList<Lexeme>();
 		Queue<Lexeme>newTokens = new LinkedList<Lexeme>();
+		int ii=0;
 		while(Tokens.size() > 0)
-		{	
+		{	if(ii<3)
+			System.out.println(Tokens.peek().value+" "+i);
+			ii++;
 			tmp.add(Tokens.peek());
 			newTokens.add(Tokens.poll());
 			
 		}
+		System.out.println(newTokens.size()+" nullllllllllllllllll");
+		System.out.println("==================");
 		while(tmp.size() > 0)
 			Tokens.add(tmp.poll());
 		String tmpo="";
@@ -242,14 +248,16 @@ public class Parser {
 					if (Tokens.peek().value.equals(")")) {
 						Tokens.poll();
 						
-						Matched matched1 = matched();	
+						Matched matched1 = matched(i+1);	
+						System.out.println("taltttt "+i+" "+matched1);
 						if(matched1 != null)
-						{System.out.println(matched1.getValue(Tokens)+" talt");
+						{	
+							System.out.println(matched1.getValue(Tokens)+" talt "+i);
 							tmpo = matched1.getValue(Tokens)+" talt";
 							if(Tokens.peek().value.equals("else"))
 							{
 								Tokens.poll();
-								Matched matched2 = matched();
+								Matched matched2 = matched(i+1);
 								if (matched2 != null) {
 									System.out.println(tmpo+ " "+matched2.getValue(Tokens)+" rabe3");
 									return new Matched1(expression, matched1, matched2);
@@ -260,17 +268,26 @@ public class Parser {
 				}
 			}
 		}
+System.out.println(newTokens.size()+" nullllllllllllllllll");
+
 		Statement statement = statement();
+		
+		System.out.println(newTokens.size()+" nullllllllllllllllll");
+		
 		if(statement != null){
-			System.out.println(statement.getValue(Tokens) +" tani");
+			
+			System.out.println(statement.getValue(Tokens)+" "+Tokens.peek().value +" tani");
 			return new Matched2(statement);}
 		System.out.println(tmpo);
 		while(Tokens.size() > 0)
 			Tokens.poll();
-		
-		while(newTokens.size() > 0)
+		ii =0;
+		while(newTokens.size() > 0){
+			if(ii<3)
+				System.out.println(newTokens.peek().value+", "+i);
+				ii++;
 			Tokens.add(newTokens.poll());
-		
+		}
 		return null;
 	}
 	public Identifier_dash identifier_dash() {
