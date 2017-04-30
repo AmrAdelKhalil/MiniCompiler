@@ -47,7 +47,7 @@ public class Parser {
 													if (Tokens.peek().value.equals("{")) {
 														Tokens.poll();
 														Statement statement = statement();
-															if (Tokens.peek().value.equals("}")) {
+														if (Tokens.peek().value.equals("}")) {
 															Tokens.poll();
 															if (Tokens.peek().value.equals("}")) {
 																Tokens.poll();
@@ -91,14 +91,14 @@ public class Parser {
 					varDeclaration1.add(varDeclerationElement);
 					varDeclerationElement = varDeclaration1();
 				}
-				
+
 				ArrayList<MethodDeclaration1> methodDeclaration1 = new ArrayList<MethodDeclaration1>();
 				MethodDeclaration1 methodDeclarationElement = methodDeclaration1();
 				while (methodDeclarationElement != null) {
 					methodDeclaration1.add(methodDeclarationElement);
 					methodDeclarationElement = methodDeclaration1();
 				}
-				
+
 				if (Tokens.peek().value.equals("}")) {
 					Tokens.poll();
 					return new ClassDeclaration1(identefier1, identefier2, varDeclaration1, methodDeclaration1);
@@ -140,7 +140,6 @@ public class Parser {
 		}
 		if (Tokens.peek().value.equals("System.out.println")) {
 			Tokens.poll();
-			
 
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
@@ -162,34 +161,32 @@ public class Parser {
 				Identifier_dash identifier_dash = identifier_dash();
 				return new Statement5(identefier1, identifier_dash);
 			}
-			if(Tokens.peek().token.equals("IF_CONDITION")){
-			If_statement if_statement = if_statement();
-			if (if_statement != null)
-				return new Statement2(if_statement);
+			if (Tokens.peek().token.equals("IF_CONDITION")) {
+				If_statement if_statement = if_statement();
+				if (if_statement != null)
+					return new Statement2(if_statement);
 			}
 		}
 		return null;
 	}
 
 	public If_statement if_statement() {
-			Matched matched = matched(0);
-			if (matched == null) {
-				Unmatched unmatched = unmatched();
-				return new If_statment2(unmatched);
-			}
-			System.out.println("afterrrrr "+matched.getValue(Tokens));
-			return new If_statment1(matched);
+		Matched matched = matched(0, new Integer(0));
+		if (matched == null) {
+			Unmatched unmatched = unmatched();
+			return new If_statment2(unmatched);
+		}
+		return new If_statment1(matched);
 	}
-	public Unmatched unmatched(){
-		
+
+	public Unmatched unmatched() {
+
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
 				Expression expression = expression();
-				System.out.println(expression.getValue(Tokens));
-				if(expression != null)
-				{
+				if (expression != null) {
 					if (Tokens.peek().value.equals(")")) {
 						Tokens.poll();
 						Unmatched_dash unmatched_dash = unmatched_dash();
@@ -201,17 +198,18 @@ public class Parser {
 		}
 		return null;
 	}
+
 	public Unmatched_dash unmatched_dash() {
 		Statement statement = statement();
 		if (statement != null)
 			return new Unmatched_dash1(statement);
-		Matched matched = matched(-10);
+		Matched matched = matched(0, new Integer(0));
 		if (matched != null) {
-			
+
 			if (Tokens.peek().value.equals("else")) {
 				Tokens.poll();
 				Unmatched unmatched = unmatched();
-				if (unmatched != null) {	
+				if (unmatched != null) {
 					return new Unmatched_dash2(matched, unmatched);
 				}
 			}
@@ -219,47 +217,39 @@ public class Parser {
 		return null;
 	}
 
-	
-	public Matched matched(int i){
-		
-		Queue<Lexeme>tmp = new LinkedList<Lexeme>();
-		Queue<Lexeme>newTokens = new LinkedList<Lexeme>();
-		int ii=0;
-		while(Tokens.size() > 0)
-		{	if(ii<3)
-			System.out.println(Tokens.peek().value+" "+i);
+	public Matched matched(int i, Integer maxNestedIf) {
+
+		Queue<Lexeme> tmp = new LinkedList<Lexeme>();
+		Queue<Lexeme> newTokens = new LinkedList<Lexeme>();
+		int ii = 0;
+		while (Tokens.size() > 0) {
+			
 			ii++;
 			tmp.add(Tokens.peek());
 			newTokens.add(Tokens.poll());
-			
+
 		}
-		System.out.println(newTokens.size()+" nullllllllllllllllll");
-		System.out.println("==================");
-		while(tmp.size() > 0)
+		while (tmp.size() > 0)
 			Tokens.add(tmp.poll());
-		String tmpo="";
+		String tmpo = "";
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
 				Expression expression = expression();
-				System.out.println(expression.getValue(Tokens) +" awl");
-				if(expression != null){
+				// System.out.println(expression.getValue(Tokens) +" awl");
+				if (expression != null) {
 					if (Tokens.peek().value.equals(")")) {
 						Tokens.poll();
-						
-						Matched matched1 = matched(i+1);	
-						System.out.println("taltttt "+i+" "+matched1);
-						if(matched1 != null)
-						{	
-							System.out.println(matched1.getValue(Tokens)+" talt "+i);
-							tmpo = matched1.getValue(Tokens)+" talt";
-							if(Tokens.peek().value.equals("else"))
-							{
+
+						Matched matched1 = matched(i + 1, maxNestedIf = maxNestedIf + 1);
+
+						if (matched1 != null) {
+							tmpo = matched1.getValue(Tokens) + " talt";
+							if (Tokens.peek().value.equals("else")) {
 								Tokens.poll();
-								Matched matched2 = matched(i+1);
+								Matched matched2 = matched(i + 1, maxNestedIf);
 								if (matched2 != null) {
-									System.out.println(tmpo+ " "+matched2.getValue(Tokens)+" rabe3");
 									return new Matched1(expression, matched1, matched2);
 								}
 							}
@@ -268,28 +258,27 @@ public class Parser {
 				}
 			}
 		}
-System.out.println(newTokens.size()+" nullllllllllllllllll");
+		Statement statement = null;
+		if (i == maxNestedIf) {
+			statement = statement();
+		}
 
-		Statement statement = statement();
-		
-		System.out.println(newTokens.size()+" nullllllllllllllllll");
-		
-		if(statement != null){
-			
-			System.out.println(statement.getValue(Tokens)+" "+Tokens.peek().value +" tani");
-			return new Matched2(statement);}
-		System.out.println(tmpo);
-		while(Tokens.size() > 0)
+
+		if (statement != null) {
+
+			return new Matched2(statement);
+		}
+		while (Tokens.size() > 0)
 			Tokens.poll();
-		ii =0;
-		while(newTokens.size() > 0){
-			if(ii<3)
-				System.out.println(newTokens.peek().value+", "+i);
-				ii++;
+		ii = 0;
+		while (newTokens.size() > 0) {
+			
+			ii++;
 			Tokens.add(newTokens.poll());
 		}
 		return null;
 	}
+
 	public Identifier_dash identifier_dash() {
 		if (Tokens.peek().value.equals("=")) {
 			Tokens.poll();
@@ -528,15 +517,18 @@ System.out.println(newTokens.size()+" nullllllllllllllllll");
 	public Final_ final_() {
 		if (Tokens.peek().token.equals("INTEGRAL_LITERAL"))
 			return new Final_1(Tokens.poll().value);
-		if (Tokens.peek().value.equals("true")){
+		if (Tokens.peek().value.equals("true")) {
 			Tokens.poll();
-			return new Final_2();}
-		if (Tokens.peek().value.equals("false")){
+			return new Final_2();
+		}
+		if (Tokens.peek().value.equals("false")) {
 			Tokens.poll();
-			return new Final_3();}
-		if (Tokens.peek().value.equals("this")){
+			return new Final_3();
+		}
+		if (Tokens.peek().value.equals("this")) {
 			Tokens.poll();
-			return new Final_4();}
+			return new Final_4();
+		}
 		Identifier identifier = identefier();
 		if (identifier != null)
 			return new Final_5(identifier);
