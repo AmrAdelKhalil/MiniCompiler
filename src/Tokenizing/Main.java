@@ -29,7 +29,6 @@ public class Main {
 		int lastIdx = 0;
 		for(int i=0;i<res.size();i++){
 			if(!res.get(i).token.equals("SPACE")){
-				System.out.println("<"+res.get(i).token+"> : "+res.get(i).value);
 				printWriter.println("<"+res.get(i).token+"> : "+res.get(i).value);
 				if(!res.get(i).value.equals("\\n"))
 					
