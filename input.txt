@@ -33,7 +33,6 @@ else
 num_aux = num * (this.ComputeFac(num-1)) + m;
 
 }
-	
 return num_aux ; 
 } 
 }
