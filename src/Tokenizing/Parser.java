@@ -98,8 +98,7 @@ public class Parser {
 					methodDeclaration1.add(methodDeclarationElement);
 					methodDeclarationElement = methodDeclaration1();
 				}
-
-				if (Tokens.peek().value.equals("}")) {
+	if (Tokens.peek().value.equals("}")) {
 					Tokens.poll();
 					return new ClassDeclaration1(identefier1, identefier2, varDeclaration1, methodDeclaration1);
 				}
@@ -178,21 +177,20 @@ public class Parser {
 
 	public If_statement if_statement() {
 		Matched matched = matched(0, new Integer(0));
-		if (matched == null) {
-			Unmatched unmatched = unmatched();
-			return new If_statment2(unmatched);
-		}
-		return new If_statment1(matched);
+			if (matched == null) {
+				Unmatched unmatched = unmatched();
+				return new If_statment2(unmatched);
+			}
+			return new If_statment1(matched);
 	}
-
-	public Unmatched unmatched() {
-
+	public Unmatched unmatched(){		
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
 				Expression expression = expression();
-				if (expression != null) {
+				if(expression != null)
+				{
 					if (Tokens.peek().value.equals(")")) {
 						Tokens.poll();
 						Unmatched_dash unmatched_dash = unmatched_dash();
@@ -204,9 +202,7 @@ public class Parser {
 		}
 		return null;
 	}
-
-	public Unmatched_dash unmatched_dash() {
-		
+	public Unmatched_dash unmatched_dash() {		
 		Queue<Lexeme> tmp = new LinkedList<Lexeme>();
 		Queue<Lexeme> newTokens = new LinkedList<Lexeme>();
 		while (Tokens.size() > 0) {	
@@ -216,7 +212,7 @@ public class Parser {
 		while (tmp.size() > 0)
 			Tokens.add(tmp.poll());
 		Matched matched = matched(0, new Integer(0));
-		
+
 		if (matched != null) {
 			if (Tokens.peek().value.equals("else")) {
 				Tokens.poll();
@@ -255,6 +251,7 @@ public class Parser {
 			Tokens.add(tmp.poll());
 		String tmpo = "";
 		boolean ok = true;
+
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
@@ -298,7 +295,6 @@ public class Parser {
 			
 		return null;
 	}
-
 	public Identifier_dash identifier_dash() {
 		if (Tokens.peek().value.equals("=")) {
 			Tokens.poll();
