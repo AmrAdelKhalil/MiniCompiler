@@ -2,9 +2,14 @@ class Factorial{
 public static void main(String[] a){ System.out.println(new Fac().ComputeFac(10)); 
 } 
 } 
-class Fac { 
-public int ComputeFac(int num){ 
-int num ; 
+class Fac1 extends Fac { 
+int num ;
+String []x;
+float []y; 
+private int ComputeFac(int num,char []a){ 
+while(x < false && true)
+{
+	System.out.println(new x());
 if (n < 1)
 num = 1;
 else 
@@ -17,7 +22,12 @@ if(a < 7)
 if(r < 88)
 num_aux = 1 ;
 else 
-num_aux = num * (this.ComputeFac(num-1)) ;
+num_aux = num * (this.ComputeFac(num-1)) + m;
+
+}
+	
 return num_aux ; 
 } 
 }
+ 
+

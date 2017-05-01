@@ -119,9 +119,14 @@ public class Parser {
 		if (Tokens.peek().value.equals("{")) {
 			Tokens.poll();
 			Statement statement = statement();
+			ArrayList<Statement> statements = new ArrayList<Statement>();
+			while (statement != null) {
+				statements.add(statement);
+				statement = statement();
+			}
 			if (Tokens.peek().value.equals("}")) {
 				Tokens.poll();
-				return new Statement1(statement);
+				return new Statement1(statements);
 			}
 		}
 

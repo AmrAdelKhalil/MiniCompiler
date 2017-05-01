@@ -1,20 +1,22 @@
 package grammar;
 
+import java.util.ArrayList;
 import java.util.Queue;
 
 import Tokenizing.Lexeme;
 
 public class Statement1 implements Statement {
-	Statement statement;
-	public Statement1(Statement statement){
-		this.statement = statement;
+	ArrayList<Statement> statements = new ArrayList<Statement>();
+	public Statement1(ArrayList<Statement> statements){
+		this.statements = statements;
 	}
 	@Override
 	public String getValue(Queue<Lexeme>q) {
 		String result = "";
 			
 		result += "{";
-		result += statement.getValue(q);
+		for(int i=0;i<statements.size();i++)
+		result += statements.get(i).getValue(q);
 		result += "}";
 		return result;
 	}
