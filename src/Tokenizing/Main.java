@@ -61,7 +61,12 @@ public class Main {
 		}*/
 		Parser p = new Parser(Tokens);
 		Goal goal = p.goal1();
+		try{
 		System.out.println(goal.getValue(Tokens));
+		}
+		catch(NullPointerException e){
+			System.out.println("Syntax Error");
+		}
 		printWriter.close(); input.close();
 	}
 
