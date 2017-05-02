@@ -9,13 +9,13 @@ public class Identifier_dash2 implements Identifier_dash{
 		this.right = right;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
+	public String getValue() {
 		String result = "[";
-		result += left.getValue(q);
+		result += left.getValue();
 		result += "]";	
-		result += "=";
-		result += right.getValue(q);
-		result += ";";
+		result += " = ";
+		result += right.getValue();
+		result += ";\n";
 			
 		return result;
 	}

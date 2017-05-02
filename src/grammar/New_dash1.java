@@ -13,12 +13,12 @@ public class New_dash1 implements New_dash {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = "";
 		res += "int";
 		res += " [";
-		res += expr.getValue(q);
-		res += "]";
+		res += expr.getValue();
+		res += "] ";
 				
 		return res;
 	}

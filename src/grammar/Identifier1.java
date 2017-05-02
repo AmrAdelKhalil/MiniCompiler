@@ -12,7 +12,7 @@ public class Identifier1 implements Identifier {
 		this.token = token;
 	}
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 	
 		return token;
 	}

@@ -14,12 +14,12 @@ public class Unmatched_dash2 implements Unmatched_dash {
 	}
 
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String result = "";
-		result += matched.getValue(q);
+		result += matched.getValue();
 
-		result += "else";
-		result += unmatched.getValue(q);
+		result += "else\n";
+		result += unmatched.getValue();
 		return result;
 	}
 }

@@ -25,35 +25,40 @@ public class MethodDeclaration1 implements MethodDeclaration{
 	
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		
 		String result = "";
 	
-		result += token;
-		result += types.get(0).getValue(q);
-		result += identifiers.get(0).getValue(q);
+		result += token + " ";
+		result += types.get(0).getValue();
+		result += identifiers.get(0).getValue();
 		result += "(";
-		for (int i = 1 ;i<types.size();i++)
-			result += types.get(i).getValue(q);
-		for(int i = 1 ;i<identifiers.size();i++)
-			result +=  identifiers.get(i).getValue(q);
+		for (int i = 1 ;i<types.size()-1;i++){
+			result += types.get(i).getValue();
+			result += identifiers.get(i).getValue();
+			result += ", ";
+		}
+		result += types.get(types.size()-1).getValue();
+		result += identifiers.get(identifiers.size()-1).getValue();
+//		for(int i = 1 ;i<identifiers.size();i++)
+//			result +=  identifiers.get(i).getValue();
 		
 		
 		result += ")";
 		
-		result += "{";
+		result += " {\n";
 		for(int i = 0 ; i < varDeclaration1.size() ; i++){
-			result += varDeclaration1.get(i).getValue(q);
+			result += "\t" + varDeclaration1.get(i).getValue();
 		}
 		for(int i = 0 ; i < statement.size() ; i++){
-			result += statement.get(i).getValue(q);
+			result += "\t" + statement.get(i).getValue();
 		}
-		result += "return";
+		result += "return ";
 		
-		result += expression.getValue(q);
-		result += ";";
+		result += expression.getValue();
+		result += ";\n";
 		
-		result += "}";
+		result += "}\n";
 		
 		return result;
 	}

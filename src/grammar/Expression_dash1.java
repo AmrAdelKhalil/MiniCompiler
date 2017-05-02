@@ -14,9 +14,9 @@ public class Expression_dash1 implements Expression_dash {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
-		String res = Token;
-		res += expr.getValue(q);
+	public String getValue() {
+		String res = " " + Token + " ";
+		res += expr.getValue();
 		
 		return res;
 

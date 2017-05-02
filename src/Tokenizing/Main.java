@@ -29,7 +29,6 @@ public class Main {
 		int lastIdx = 0;
 		for(int i=0;i<res.size();i++){
 			if(!res.get(i).token.equals("SPACE")){
-				System.out.println("<"+res.get(i).token+"> : "+res.get(i).value);
 				printWriter.println("<"+res.get(i).token+"> : "+res.get(i).value);
 				if(!res.get(i).value.equals("\\n"))
 					
@@ -60,9 +59,17 @@ public class Main {
 			System.out.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 			printWriter.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 		}*/
-		Parser p = new Parser(Tokens);
-		Goal goal = p.goal1();
-		System.out.println(goal.getValue(Tokens));
+		
+		try{
+			Parser p = new Parser(Tokens);
+			Goal goal = p.goal1();
+		
+			System.out.println(goal.getValue());
+				
+		}
+		catch(NullPointerException e){
+			System.out.println("Syntax Error");
+		}
 		printWriter.close(); input.close();
 	}
 

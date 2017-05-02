@@ -13,10 +13,10 @@ public class Expression_dash3 implements Expression_dash {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = ".";
 		
-		res += dotDash.getValue(q);
+		res += dotDash.getValue();
 		
 		return res;
 

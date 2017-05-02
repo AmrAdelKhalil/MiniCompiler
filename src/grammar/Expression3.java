@@ -16,12 +16,12 @@ public class Expression3 implements Expression {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = "";
 		res += "(";
-		res += expr.getValue(q);
+		res += expr.getValue();
 		res += ")";
-		res += EDD.getValue(q);
+		res += EDD.getValue();
 		return res;
 
 	}

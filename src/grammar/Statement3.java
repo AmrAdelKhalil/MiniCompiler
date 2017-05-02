@@ -11,15 +11,15 @@ public class Statement3 implements Statement {
 		this.statement = statement;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
+	public String getValue() {
 		String result ="";
-		result = "while";
+		result += "while";
 
 		result += "(";
-		result += expression.getValue(q);
+		result += expression.getValue();
 	
 		result += ")";
-		result += statement.getValue(q);
+		result += statement.getValue();
 			
 		return result;
 	}

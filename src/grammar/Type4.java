@@ -7,11 +7,11 @@ import Tokenizing.Lexeme;
 public class Type4 implements Type {
 
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 
 		String result = "";
 
-		result += "float";
+		result += "float ";
 
 		return result;
 	}

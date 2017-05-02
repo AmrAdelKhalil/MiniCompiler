@@ -16,13 +16,13 @@ public class Goal1 implements Goal{
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		
 		String result = "";
 		
-	    result = mainClass.getValue(q);
+	    result = mainClass.getValue();
 	    
-	    result+= classDeclaration.getValue(q);
+	    result+= classDeclaration.getValue();
 	    
 	    return result;
 	    

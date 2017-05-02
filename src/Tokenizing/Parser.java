@@ -15,7 +15,8 @@ public class Parser {
 
 	public Goal1 goal1() {
 		MainClass1 mainClass = mainClass();
-		ClassDeclaration1 classdeclaration = classdeclaration();
+		ClassDeclaration1 classdeclaration = classdeclaration = classdeclaration();
+		
 		return new Goal1(mainClass, classdeclaration);
 	}
 
@@ -47,7 +48,7 @@ public class Parser {
 													if (Tokens.peek().value.equals("{")) {
 														Tokens.poll();
 														Statement statement = statement();
-															if (Tokens.peek().value.equals("}")) {
+														if (Tokens.peek().value.equals("}")) {
 															Tokens.poll();
 															if (Tokens.peek().value.equals("}")) {
 																Tokens.poll();
@@ -72,6 +73,7 @@ public class Parser {
 	}
 
 	public ClassDeclaration1 classdeclaration() {
+//		System.out.println(Tokens.size());
 		if (Tokens.peek().value.equals("class")) {
 			Tokens.poll();
 			Identifier identefier1 = identefier();
@@ -91,14 +93,14 @@ public class Parser {
 					varDeclaration1.add(varDeclerationElement);
 					varDeclerationElement = varDeclaration1();
 				}
-				
+
 				ArrayList<MethodDeclaration1> methodDeclaration1 = new ArrayList<MethodDeclaration1>();
 				MethodDeclaration1 methodDeclarationElement = methodDeclaration1();
 				while (methodDeclarationElement != null) {
 					methodDeclaration1.add(methodDeclarationElement);
 					methodDeclarationElement = methodDeclaration1();
 				}
-				
+
 				if (Tokens.peek().value.equals("}")) {
 					Tokens.poll();
 					return new ClassDeclaration1(identefier1, identefier2, varDeclaration1, methodDeclaration1);
@@ -119,9 +121,14 @@ public class Parser {
 		if (Tokens.peek().value.equals("{")) {
 			Tokens.poll();
 			Statement statement = statement();
+			ArrayList<Statement> statements = new ArrayList<Statement>();
+			while (statement != null) {
+				statements.add(statement);
+				statement = statement();
+			}
 			if (Tokens.peek().value.equals("}")) {
 				Tokens.poll();
-				return new Statement1(statement);
+				return new Statement1(statements);
 			}
 		}
 
@@ -140,7 +147,6 @@ public class Parser {
 		}
 		if (Tokens.peek().value.equals("System.out.println")) {
 			Tokens.poll();
-			
 
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
@@ -162,33 +168,33 @@ public class Parser {
 				Identifier_dash identifier_dash = identifier_dash();
 				return new Statement5(identefier1, identifier_dash);
 			}
-			if(Tokens.peek().token.equals("IF_CONDITION")){
-			If_statement if_statement = if_statement();
-			if (if_statement != null)
-				return new Statement2(if_statement);
+			if (Tokens.peek().token.equals("IF_CONDITION")) {
+				If_statement if_statement = if_statement();
+				if (if_statement != null)
+					return new Statement2(if_statement);
 			}
 		}
+		
 		return null;
 	}
 
 	public If_statement if_statement() {
-			Matched matched = matched();
-			if (matched == null) {
-				Unmatched unmatched = unmatched();
-				return new If_statment2(unmatched);
-			}
-			return new If_statment1(matched);
+		Matched matched = matched(0, new Integer(0));
+		if (matched == null) {
+			Unmatched unmatched = unmatched();
+			return new If_statment2(unmatched);
+		}
+		return new If_statment1(matched);
 	}
-	public Unmatched unmatched(){
-		
+
+	public Unmatched unmatched() {
+
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
 				Expression expression = expression();
-				System.out.println(expression.getValue(Tokens));
-				if(expression != null)
-				{
+				if (expression != null) {
 					if (Tokens.peek().value.equals(")")) {
 						Tokens.poll();
 						Unmatched_dash unmatched_dash = unmatched_dash();
@@ -200,79 +206,101 @@ public class Parser {
 		}
 		return null;
 	}
+
 	public Unmatched_dash unmatched_dash() {
-		Statement statement = statement();
-		if (statement != null)
-			return new Unmatched_dash1(statement);
-		Matched matched = matched();
+		
+		Queue<Lexeme> tmp = new LinkedList<Lexeme>();
+		Queue<Lexeme> newTokens = new LinkedList<Lexeme>();
+		while (Tokens.size() > 0) {	
+			tmp.add(Tokens.peek());
+			newTokens.add(Tokens.poll());
+		}
+		while (tmp.size() > 0)
+			Tokens.add(tmp.poll());
+		Matched matched = matched(0, new Integer(0));
+		
 		if (matched != null) {
-			
 			if (Tokens.peek().value.equals("else")) {
 				Tokens.poll();
 				Unmatched unmatched = unmatched();
-				if (unmatched != null) {	
+				if (unmatched != null) {
 					return new Unmatched_dash2(matched, unmatched);
 				}
 			}
 		}
+		while (Tokens.size() > 0)
+			Tokens.poll();
+		
+		while (newTokens.size() > 0) 
+			Tokens.add(newTokens.poll());
+		
+		Statement statement = statement();
+		if (statement != null)
+			return new Unmatched_dash1(statement);
 		return null;
 	}
 
-	
-	public Matched matched(){
-		
-		Queue<Lexeme>tmp = new LinkedList<Lexeme>();
-		Queue<Lexeme>newTokens = new LinkedList<Lexeme>();
-		while(Tokens.size() > 0)
-		{	
+	public Matched matched(int i, Integer maxNestedIf) {
+		Matched matched1 = null;
+		Matched matched2 = null;
+		Queue<Lexeme> tmp = new LinkedList<Lexeme>();
+		Queue<Lexeme> newTokens = new LinkedList<Lexeme>();
+		int ii = 0;
+		while (Tokens.size() > 0) {
+			
+			ii++;
 			tmp.add(Tokens.peek());
 			newTokens.add(Tokens.poll());
-			
+
 		}
-		while(tmp.size() > 0)
+		while (tmp.size() > 0)
 			Tokens.add(tmp.poll());
-		String tmpo="";
+//		String tmpo = "";
+		boolean ok = true;
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
 			if (Tokens.peek().value.equals("(")) {
 				Tokens.poll();
 				Expression expression = expression();
-				System.out.println(expression.getValue(Tokens) +" awl");
-				if(expression != null){
+				if (expression != null) {
 					if (Tokens.peek().value.equals(")")) {
 						Tokens.poll();
-						
-						Matched matched1 = matched();	
-						if(matched1 != null)
-						{System.out.println(matched1.getValue(Tokens)+" talt");
-							tmpo = matched1.getValue(Tokens)+" talt";
-							if(Tokens.peek().value.equals("else"))
-							{
+						ok = false;
+										
+						matched1 = matched(i + 1, maxNestedIf = maxNestedIf + 1);
+						if (matched1 != null) {
+							
+//							tmpo = matched1.getValue(Tokens) + " talt";
+							if (Tokens.peek().value.equals("else")) {
 								Tokens.poll();
-								Matched matched2 = matched();
+								matched2 = matched(i + 1, maxNestedIf);
 								if (matched2 != null) {
-									System.out.println(tmpo+ " "+matched2.getValue(Tokens)+" rabe3");
 									return new Matched1(expression, matched1, matched2);
 								}
+							
 							}
 						}
 					}
 				}
 			}
 		}
-		Statement statement = statement();
-		if(statement != null){
-			System.out.println(statement.getValue(Tokens) +" tani");
-			return new Matched2(statement);}
-		System.out.println(tmpo);
-		while(Tokens.size() > 0)
-			Tokens.poll();
 		
-		while(newTokens.size() > 0)
-			Tokens.add(newTokens.poll());
+		Statement statement = null;
+		if((matched1 != null && matched2 !=null) || ok)
+			statement = statement();
+
+		if (statement != null  ) {
+			return new Matched2(statement);
+		}
 		
+			while (Tokens.size() > 0)
+				Tokens.poll();
+			while (newTokens.size() > 0) 
+				Tokens.add(newTokens.poll());
+			
 		return null;
 	}
+
 	public Identifier_dash identifier_dash() {
 		if (Tokens.peek().value.equals("=")) {
 			Tokens.poll();
@@ -511,15 +539,18 @@ public class Parser {
 	public Final_ final_() {
 		if (Tokens.peek().token.equals("INTEGRAL_LITERAL"))
 			return new Final_1(Tokens.poll().value);
-		if (Tokens.peek().value.equals("true")){
+		if (Tokens.peek().value.equals("true")) {
 			Tokens.poll();
-			return new Final_2();}
-		if (Tokens.peek().value.equals("false")){
+			return new Final_2();
+		}
+		if (Tokens.peek().value.equals("false")) {
 			Tokens.poll();
-			return new Final_3();}
-		if (Tokens.peek().value.equals("this")){
+			return new Final_3();
+		}
+		if (Tokens.peek().value.equals("this")) {
 			Tokens.poll();
-			return new Final_4();}
+			return new Final_4();
+		}
 		Identifier identifier = identefier();
 		if (identifier != null)
 			return new Final_5(identifier);
