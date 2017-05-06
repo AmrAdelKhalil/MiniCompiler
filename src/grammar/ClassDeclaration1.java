@@ -21,26 +21,26 @@ public class ClassDeclaration1 implements ClassDeclaration{
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		
 		String result = "";
 		
-			result += "class";
-			result += identifier1.getValue(q);
+			result += "\nclass ";
+			result += identifier1.getValue();
 				if(identifier2 != null){
-				result += "extends";
-				result += identifier2.getValue(q);
+				result += " extends ";
+				result += identifier2.getValue();
 				}
-				result += "{";
+				result += " {\n";
 				
 				for (int i = 0 ; i < varDeclaration.size() ; i++){
-					result += varDeclaration.get(i).getValue(q);
+					result += "\t" + varDeclaration.get(i).getValue();
 				}
 				for (int i = 0 ; i < methodDeclaration.size() ; i++){
-					result += methodDeclaration.get(i).getValue(q);
+					result += "\t" + methodDeclaration.get(i).getValue();
 				}
 				
-					result += "}";
+					result += "\n}";
 		
 		return result;
 

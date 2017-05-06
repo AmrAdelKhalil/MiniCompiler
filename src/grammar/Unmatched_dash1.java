@@ -10,8 +10,8 @@ public class Unmatched_dash1 implements Unmatched_dash{
 		this.statement = statement;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
+	public String getValue() {
 		// TODO Auto-generated method stub
-		return statement.getValue(q);
+		return statement.getValue();
 	}
 }

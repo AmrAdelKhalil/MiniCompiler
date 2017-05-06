@@ -13,9 +13,9 @@ public class New_dash2 implements New_dash {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = "";
-		res += id.getValue(q);
+		res += id.getValue();
 			
 		res += "(";
 				

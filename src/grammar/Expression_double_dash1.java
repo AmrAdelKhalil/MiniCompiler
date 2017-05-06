@@ -16,9 +16,9 @@ public class Expression_double_dash1 implements Expression_double_dash {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		
-		return ED.getValue(q) + EDD.getValue(q);
+		return ED.getValue() + EDD.getValue();
 
 	}
 

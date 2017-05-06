@@ -7,6 +7,6 @@ import Tokenizing.Lexeme;
 
 public interface Expression_dash {
 
-	public String getValue(Queue<Lexeme> q);
+	public String getValue();
 
 }

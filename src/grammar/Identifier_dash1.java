@@ -10,10 +10,10 @@ public class Identifier_dash1 implements Identifier_dash{
 		this.expression = expression;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
-		String result = "=";
-		result += expression.getValue(q);
-		result += ";";
+	public String getValue() {
+		String result = " = ";
+		result += expression.getValue();
+		result += ";\n";
 		return result;
 	}
 

@@ -10,8 +10,8 @@ public class Statement2 implements Statement {
 		this.if_statement = if_statement;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
-		String result = if_statement.getValue(q);
+	public String getValue() {
+		String result = if_statement.getValue();
 		return result;
 	}
 	

@@ -13,7 +13,7 @@ public class Final_1 implements Final_ {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		// TODO Auto-generated method stub
 		return integerLiteral;
 	}

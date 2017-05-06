@@ -10,17 +10,17 @@ public class Statement4 implements Statement {
 		this.expression = expression;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
-		String result = "";
+	public String getValue() {
+		String result = "\t";
 		
-		result = "System.out.println";
+		result += "System.out.println";
 		
 		result += "(";	
-		result += expression.getValue(q);
+		result += expression.getValue();
 				
 		result += ")";	
 	
-		result += ";";	
+		result += ";\n";	
 				
 		
 		return result; 

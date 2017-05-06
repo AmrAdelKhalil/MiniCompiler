@@ -12,7 +12,7 @@ public class If_statment2 implements If_statement{
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme>q) {
-		return unmatched.getValue(q);
+	public String getValue() {
+		return unmatched.getValue();
 	}
 }

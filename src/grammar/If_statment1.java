@@ -12,8 +12,8 @@ public class If_statment1 implements If_statement{
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme>q) {
-		return matched.getValue(q);
+	public String getValue() {
+		return matched.getValue();
 	}
 
 }

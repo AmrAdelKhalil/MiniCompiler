@@ -17,26 +17,26 @@ public class MainClass1 implements MainClass{
 	}
 
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String result = "";
 		
-			result += "class";
-			result += identifier1.getValue(q);
-				result += "{";
-					result += "public";
-						result += "static";
-							result += "void";
-								result += "main";
+			result += "class ";
+			result += identifier1.getValue();
+				result += " {\n";
+					result += "\tpublic ";
+						result += "static ";
+							result += "void ";
+								result += "main ";
 									result += "(";
 										result += "String";
 											result += "[";
-												result += "]";
-												result += identifier2.getValue(q);
+												result += "] ";
+												result += identifier2.getValue();
 													result += ")";
-														result += "{";
-														result += statement.getValue(q);
-															result += "}";
-																result += "}";
+														result += " {\n";
+														result += "\t" + statement.getValue();
+															result += "\t}";
+																result += "\n}";
 	 return result;
 	}
 	

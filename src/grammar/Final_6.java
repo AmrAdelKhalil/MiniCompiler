@@ -13,10 +13,10 @@ public class Final_6 implements Final_{
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = "";	
-		res += "new";
-		res += ND.getValue(q);
+		res += "new ";
+		res += ND.getValue();
 		return res;
 	}
 

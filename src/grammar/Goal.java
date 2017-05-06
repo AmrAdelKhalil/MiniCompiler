@@ -6,6 +6,6 @@ import java.util.Queue;
 
 public interface Goal {
 
-	public String getValue(Queue<Lexeme> q);
+	public String getValue();
 	
 }

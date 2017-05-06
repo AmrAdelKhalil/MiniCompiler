@@ -13,16 +13,16 @@ public class Matched1 implements Matched{
 		this.right = right;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
+	public String getValue() {
 		String result = "if";
 		result += "(";
-		result += expression.getValue(q);
+		result += expression.getValue();
 		
 		result += ")";
-		result += left.getValue(q);
+		result += left.getValue();
 		
-		result += "else";
-		result += right.getValue(q);
+		result += "else ";
+		result += right.getValue();
 		
 		return result;
 	}

@@ -6,6 +6,6 @@ import Tokenizing.Lexeme;
 
 public interface VarDeclaration {
 	
-	public String getValue(Queue<Lexeme> q);
+	public String getValue();
 	
 }

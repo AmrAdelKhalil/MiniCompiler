@@ -7,7 +7,7 @@ import Tokenizing.Lexeme;
 public class Type9 implements Type {
 
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 
 		String result = "";
 
@@ -15,7 +15,7 @@ public class Type9 implements Type {
 
 		result += "[";
 
-		result += "]";
+		result += "] ";
 
 		return result;
 	}
