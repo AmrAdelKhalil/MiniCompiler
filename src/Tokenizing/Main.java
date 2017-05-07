@@ -59,9 +59,17 @@ public class Main {
 			System.out.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 			printWriter.println("<"+errors.get(i).token+"> : "+errors.get(i).value);
 		}*/
-		Parser p = new Parser(Tokens);
-		Goal goal = p.goal1();
-		System.out.println(goal.getValue(Tokens));
+		
+		try{
+			Parser p = new Parser(Tokens);
+			Goal goal = p.goal1();
+		
+			System.out.println(goal.getValue());
+				
+		}
+		catch(NullPointerException e){
+			System.out.println("Syntax Error");
+		}
 		printWriter.close(); input.close();
 	}
 

@@ -15,13 +15,13 @@ public class VarDeclaration1 implements VarDeclaration{
 	}
 
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String result = "";
 		
-		result += type.getValue(q);
-		result += identifier.getValue(q);
+		result += type.getValue();
+		result += identifier.getValue();
 		
-		result += ";";
+		result += ";\n";
 		return result;
 	}	
 }

@@ -16,11 +16,11 @@ public class Expression2 implements Expression {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = "";
 			res += "!";
-			res += expr.getValue(q);
-			res += EDD.getValue(q);
+			res += expr.getValue();
+			res += EDD.getValue();
 		
 		return res;
 	}

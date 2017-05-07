@@ -14,15 +14,15 @@ public class Unmatched1 implements Unmatched {
 	}
 
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String result = "";
 		result = "if";
 
-		result += "(";
-		result += expression.getValue(q);
+		result += " (";
+		result += expression.getValue();
 
-		result += ")";
-		result += unmatched_dash.getValue(q);
+		result += ") ";
+		result += unmatched_dash.getValue();
 
 		return result;
 	}

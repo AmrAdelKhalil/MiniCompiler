@@ -13,9 +13,9 @@ public class Final_5 implements Final_ {
 	}
 	
 	@Override
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		
-		return id.getValue(q);
+		return id.getValue();
 	}
 
 }

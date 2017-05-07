@@ -14,12 +14,20 @@ if (n < 1)
 num = 1;
 else 
 if (u < 1)
+num = 1;
+else 
 if (m < 1)
 x = 55;
 else
+if(true)
+if(a < 7)
 if(mmmm < 2)
 if(a < 7)
-if(r < 88)
+if(mmmm < 2)
+if(a < 7)
+num = 1;
+else 
+if(!false)
 num_aux = 1 ;
 else 
 num_aux = num * (this.ComputeFac(num-1)) + m;
@@ -28,5 +36,39 @@ num_aux = num * (this.ComputeFac(num-1)) + m;
 return num_aux ; 
 } 
 }
- 
+
+class Fac1 extends Fac { 
+int num ;
+String []x;
+float []y; 
+private int ComputeFac(int num,char []a){ 
+while(x < false && true)
+{
+	System.out.println(new x());
+if (n < 1)
+num = 1;
+else 
+if (u < 1)
+num = 1;
+else 
+if (m < 1)
+x = 55;
+else
+if(true)
+if(a < 7)
+if(mmmm < 2)
+if(a < 7)
+if(mmmm < 2)
+if(a < 7)
+num = 1;
+else 
+if(!false)
+num_aux = 1 ;
+else 
+num_aux = num * (this.ComputeFac(num-1)) + m;
+
+}
+return num_aux ; 
+} 
+} 
 

@@ -10,9 +10,9 @@ public class Matched2 implements Matched{
 		this.statement = statement;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
+	public String getValue() {
 		// TODO Auto-generated method stub
-		return statement.getValue(q);
+		return statement.getValue();
 	}
 
 }

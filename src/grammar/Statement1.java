@@ -11,13 +11,13 @@ public class Statement1 implements Statement {
 		this.statements = statements;
 	}
 	@Override
-	public String getValue(Queue<Lexeme>q) {
+	public String getValue() {
 		String result = "";
-			
-		result += "{";
+		
+		result += " {\n";
 		for(int i=0;i<statements.size();i++)
-		result += statements.get(i).getValue(q);
-		result += "}";
+		result += "\t" + statements.get(i).getValue();
+		result += "}\n";
 		return result;
 	}
 	

@@ -13,7 +13,7 @@ public class Expression_double_dash2 implements Expression_double_dash {
 	
 	@Override
 
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		return "";
 	}
 

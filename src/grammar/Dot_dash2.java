@@ -20,12 +20,12 @@ public class Dot_dash2 implements Dot_dash {
 	
 	@Override
 
-	public String getValue(Queue<Lexeme> q) {
+	public String getValue() {
 		String res = "";
-		res += id.getValue(q)+"(";
-		res += expr1.getValue(q);
+		res += id.getValue()+"(";
+		res += expr1.getValue();
 		for (int i=0;i<expr2.size();i++)
-			res +="," + expr2.get(i).getValue(q);
+			res +=", " + expr2.get(i).getValue();
 		res += ")";
 		return res;
 

@@ -7,7 +7,7 @@ import Tokenizing.Lexeme;
 
 public interface MainClass {
 	
-	public String getValue(Queue<Lexeme> q);
+	public String getValue();
 
 	
 }
