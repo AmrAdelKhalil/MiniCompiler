@@ -1,18 +1,16 @@
 package grammar;
 
-import java.util.Queue;
-
-import Tokenizing.Lexeme;
+import java.util.ArrayList;
 
 
 public class Goal1 implements Goal{
 	
 	MainClass mainClass;
-	ClassDeclaration classDeclaration;
+	ArrayList<ClassDeclaration1> classDeclarations;
 	
-	public Goal1(MainClass mainClass, ClassDeclaration classDeclaration){
+	public Goal1(MainClass mainClass, ArrayList<ClassDeclaration1> classDeclarations){
 		this.mainClass = mainClass;
-		this.classDeclaration = classDeclaration;
+		this.classDeclarations = classDeclarations;
 	}
 	
 	@Override
@@ -21,8 +19,8 @@ public class Goal1 implements Goal{
 		String result = "";
 		
 	    result = mainClass.getValue();
-	    
-	    result+= classDeclaration.getValue();
+	    for(int i= 0;i<classDeclarations.size();i++)
+	    	result+= classDeclarations.get(i).getValue();
 	    
 	    return result;
 	    

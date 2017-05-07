@@ -4,7 +4,69 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import grammar.*;
+import grammar.ClassDeclaration;
+import grammar.ClassDeclaration1;
+import grammar.Dot_dash;
+import grammar.Dot_dash1;
+import grammar.Dot_dash2;
+import grammar.Expression;
+import grammar.Expression1;
+import grammar.Expression2;
+import grammar.Expression3;
+import grammar.Expression_dash;
+import grammar.Expression_dash1;
+import grammar.Expression_dash2;
+import grammar.Expression_dash3;
+import grammar.Expression_double_dash;
+import grammar.Expression_double_dash1;
+import grammar.Expression_double_dash2;
+import grammar.Final_;
+import grammar.Final_1;
+import grammar.Final_2;
+import grammar.Final_3;
+import grammar.Final_4;
+import grammar.Final_5;
+import grammar.Final_6;
+import grammar.Goal1;
+import grammar.Identifier;
+import grammar.Identifier1;
+import grammar.Identifier_dash;
+import grammar.Identifier_dash1;
+import grammar.Identifier_dash2;
+import grammar.If_statement;
+import grammar.If_statment1;
+import grammar.If_statment2;
+import grammar.MainClass1;
+import grammar.Matched;
+import grammar.Matched1;
+import grammar.Matched2;
+import grammar.MethodDeclaration1;
+import grammar.New_dash;
+import grammar.New_dash1;
+import grammar.New_dash2;
+import grammar.Statement;
+import grammar.Statement1;
+import grammar.Statement2;
+import grammar.Statement3;
+import grammar.Statement4;
+import grammar.Statement5;
+import grammar.Type;
+import grammar.Type1;
+import grammar.Type10;
+import grammar.Type2;
+import grammar.Type3;
+import grammar.Type4;
+import grammar.Type5;
+import grammar.Type6;
+import grammar.Type7;
+import grammar.Type8;
+import grammar.Type9;
+import grammar.Unmatched;
+import grammar.Unmatched1;
+import grammar.Unmatched_dash;
+import grammar.Unmatched_dash1;
+import grammar.Unmatched_dash2;
+import grammar.VarDeclaration1;
 
 public class Parser {
 	Queue<Lexeme> Tokens = new LinkedList<Lexeme>();
@@ -15,9 +77,20 @@ public class Parser {
 
 	public Goal1 goal1() {
 		MainClass1 mainClass = mainClass();
-		ClassDeclaration1 classdeclaration = classdeclaration = classdeclaration();
+		ArrayList<ClassDeclaration1> classdeclarations = new ArrayList<>();
+		ClassDeclaration1 classdeclaration = null;
+		if(Tokens.size() > 0)
+		  classdeclaration = classdeclaration = classdeclaration();
 		
-		return new Goal1(mainClass, classdeclaration);
+		while(classdeclaration != null)
+		{	
+			classdeclarations.add(classdeclaration);
+			classdeclaration = null;
+			if(Tokens.size() > 0)
+				  classdeclaration = classdeclaration = classdeclaration();
+			
+		}
+		return new Goal1(mainClass, classdeclarations);
 	}
 
 	public MainClass1 mainClass() {
@@ -73,7 +146,6 @@ public class Parser {
 	}
 
 	public ClassDeclaration1 classdeclaration() {
-//		System.out.println(Tokens.size());
 		if (Tokens.peek().value.equals("class")) {
 			Tokens.poll();
 			Identifier identefier1 = identefier();
@@ -218,7 +290,6 @@ public class Parser {
 		while (tmp.size() > 0)
 			Tokens.add(tmp.poll());
 		Matched matched = matched(0, new Integer(0));
-		
 		if (matched != null) {
 			if (Tokens.peek().value.equals("else")) {
 				Tokens.poll();
@@ -255,7 +326,7 @@ public class Parser {
 		}
 		while (tmp.size() > 0)
 			Tokens.add(tmp.poll());
-//		String tmpo = "";
+
 		boolean ok = true;
 		if (Tokens.peek().value.equals("if")) {
 			Tokens.poll();
@@ -268,9 +339,7 @@ public class Parser {
 						ok = false;
 										
 						matched1 = matched(i + 1, maxNestedIf = maxNestedIf + 1);
-						if (matched1 != null) {
-							
-//							tmpo = matched1.getValue(Tokens) + " talt";
+						if (matched1 != null) {							
 							if (Tokens.peek().value.equals("else")) {
 								Tokens.poll();
 								matched2 = matched(i + 1, maxNestedIf);
