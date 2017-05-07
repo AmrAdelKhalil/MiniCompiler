@@ -3,9 +3,7 @@ public static void main(String[] a){ System.out.println(new Fac().ComputeFac(10)
 } 
 } 
 class Fac1 extends Fac { 
-int num ;
-String []x;
-float []y; 
+
 private int ComputeFac(int num,char []a){ 
 while(x < false && true)
 {
